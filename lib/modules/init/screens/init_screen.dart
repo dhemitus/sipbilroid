@@ -29,6 +29,16 @@ class _InitScreenState extends State<InitScreen> {
             Navigator.of(context).popAndPushNamed(OnBoardRoutes.path);
           });
         }
+        if(state.init.init == InitModel.login) {
+          WidgetsBinding.instance!.addPostFrameCallback((_) { 
+            Navigator.of(context).popAndPushNamed(AuthenticationRoutes.path);
+          });
+        }
+        if(state.init.init == InitModel.main) {
+          WidgetsBinding.instance!.addPostFrameCallback((_) { 
+            Navigator.of(context).popAndPushNamed(MainRoutes.path);
+          });
+        }
         return InitTemplate(
           child: BaseContainer(
             alignment: Alignment.center,

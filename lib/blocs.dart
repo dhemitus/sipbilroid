@@ -9,7 +9,8 @@ class Blocs {
       providers: [
         InitRoutes.bloc,
         OnBoardRoutes.bloc,
-        AuthenticationRoutes.bloc
+        AuthenticationRoutes.bloc,
+        MainRoutes.bloc
       ], 
       child: child
     );

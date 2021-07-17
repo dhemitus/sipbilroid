@@ -20,6 +20,7 @@ class _OnBoardScreenState extends State<OnBoardScreen> {
   }
 
   void _onNext() {
+    BlocProvider.of<InitBloc>(context).add(SetInit(InitModel(init: InitModel.login)));
     Navigator.of(context).pushReplacementNamed(AuthenticationRoutes.path);
   }
 

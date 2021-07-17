@@ -6,6 +6,7 @@ class Routes {
   static final Map<String, WidgetBuilder> screens = {
     InitRoutes.path: (BuildContext context) => InitScreen(),
     OnBoardRoutes.path: (BuildContext context) => OnBoardScreen(),
-    AuthenticationRoutes.path: (BuildContext context) => LoginScreen()
+    AuthenticationRoutes.path: (BuildContext context) => LoginScreen(),
+    MainRoutes.path: (BuildContext context) => MainScreen()
   };
 }
