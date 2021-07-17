@@ -1,4 +1,6 @@
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
+import 'package:sipbilroid/shareds/shareds.dart';
 
 enum OnBoardStatus {
   INIT,
@@ -7,9 +9,16 @@ enum OnBoardStatus {
   DONE
 }
 
+List<OnBoardModel> onBoards = [
+  OnBoardModel(image: SVGS.onboard1, title: 'on board 1'),
+  OnBoardModel(image: SVGS.onboard2, title: 'on board 2'),
+  OnBoardModel(image: SVGS.onboard3, title: 'on board 3'),
+];
+
 class OnBoardModel extends Equatable {
-  final String? title, subtitle, image, message;
+  final String? title, subtitle, message;
   final List<OnBoardModel>? list;
+  final Widget? image;
 
   OnBoardModel({this.image, this.subtitle, this.title, this.message, this.list});
 
@@ -17,7 +26,7 @@ class OnBoardModel extends Equatable {
   List<Object?> get props => [image, subtitle, title, message, list];
 
   OnBoardModel copyWith({
-    String? image,
+    Widget? image,
     String? subtitle,
     String? title,
     String? message,

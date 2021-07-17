@@ -5,3 +5,4 @@ export './styles.dart';
 export './image.dart';
 export './net.dart';
 export './color.dart';
+export './svgs.dart';

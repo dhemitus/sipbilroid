@@ -24,8 +24,16 @@ class _InitScreenState extends State<InitScreen> {
       buildWhen: (previous, current) => previous.init != current.init,
       builder: (BuildContext context, InitState state) {
         print(state.init.init);
+        if(state.init.init == InitModel.onBoard) {
+          WidgetsBinding.instance!.addPostFrameCallback((_) { 
+            Navigator.of(context).popAndPushNamed(OnBoardRoutes.path);
+          });
+        }
         return InitTemplate(
-          child: Heavy13Text('init'),
+          child: BaseContainer(
+            alignment: Alignment.center,
+            child: Heavy13Text('init')
+          ),
         );
       }
     );

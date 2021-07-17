@@ -47,7 +47,7 @@ class InputText extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        Medium11Text(title ?? ''),
+        Regular9Text(title ?? ''),
         BaseInput(
           value: value,
           line: line,

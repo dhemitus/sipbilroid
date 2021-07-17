@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:sipbilroid/shareds/shareds.dart';
 import 'package:sipbilroid/themes.dart';
+import 'package:sipbilroid/routes.dart';
 import 'package:sipbilroid/modules/modules.dart';
 
 class SipbilroidApp extends StatelessWidget {
@@ -11,7 +12,8 @@ class SipbilroidApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'SIP BILROID',
       theme: Themes.lightMode,
-      home: InitScreen(),
+      initialRoute: InitRoutes.path,
+      routes: Routes.screens,
     ));
   }
 }

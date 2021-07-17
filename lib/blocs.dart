@@ -8,7 +8,8 @@ class Blocs {
     return MultiBlocProvider(
       providers: [
         InitRoutes.bloc,
-        OnBoardRoutes.bloc
+        OnBoardRoutes.bloc,
+        AuthenticationRoutes.bloc
       ], 
       child: child
     );

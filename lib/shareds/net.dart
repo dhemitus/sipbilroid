@@ -1,6 +1,6 @@
 class ConfigNet {
   static const String DOMAIN = '151.106.113.7';
-  static const String MAIN_PATH = 'bbm-claim-api';
+  static const String MAIN_PATH = '/bbm-claim-api';
   static const String VERSION = '/v1';
   static const String LOGIN_PATH = '/token';
   static const String CLIENT_PATH = '/me';
