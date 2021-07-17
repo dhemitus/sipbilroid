@@ -13,7 +13,10 @@ class OnBoardModel extends Equatable {
 
   OnBoardModel({this.image, this.subtitle, this.title, this.message, this.list});
 
-  copyWith({
+  @override
+  List<Object?> get props => [image, subtitle, title, message, list];
+
+  OnBoardModel copyWith({
     String? image,
     String? subtitle,
     String? title,
@@ -26,7 +29,4 @@ class OnBoardModel extends Equatable {
     message: message ?? this.message,
     list: list ?? this.list
   );
-
-  @override
-  List<Object?> get props => [image, subtitle, title, message, list];
 }

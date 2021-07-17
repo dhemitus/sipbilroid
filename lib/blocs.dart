@@ -7,6 +7,7 @@ class Blocs {
   static MultiBlocProvider blocsList(Widget child) {
     return MultiBlocProvider(
       providers: [
+        InitRoutes.bloc,
         OnBoardRoutes.bloc
       ], 
       child: child
