@@ -51,6 +51,15 @@ class AuthenticationModel extends Equatable {
     'new_password': newPassword!
   };
 
+  Map<String, String?> toJson() => {
+    'password': password ?? null,
+    'new_password': newPassword ?? null,
+    'status': status ?? null,
+    'token': token ?? null,
+    'refreshToken': refreshToken ?? null,
+    'phone': phone ?? null
+  };
+
   String get authorization => 'Bearer $token';
 
   factory AuthenticationModel.fromJson(Map<String, String> _json) => AuthenticationModel(

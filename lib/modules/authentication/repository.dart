@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'package:sipbilroid/modules/modules.dart';
@@ -18,8 +19,14 @@ class AuthenticationRepository {
       );
 
       if(_response.statusCode == 200) {
-        print(_response.body);
-        return auth;
+        Map _json = jsonDecode(_response.body);
+        SharedPreferences _storage = await SharedPreferences.getInstance();
+ 
+        AuthenticationModel _auth = auth.copyWith(token: _json['token'], refreshToken: _json['refreshToken'], status: _json['status']);
+
+        await _storage.setString('authentication', jsonEncode(_auth.toJson()));
+
+        return _auth;
       } else {
         throw auth.copyWith(message: 'failed');
       }

@@ -32,7 +32,7 @@ class _InitScreenState extends State<InitScreen> {
         return InitTemplate(
           child: BaseContainer(
             alignment: Alignment.center,
-            child: Heavy13Text('init')
+            child: Heavy13Text('loading...')
           ),
         );
       }
