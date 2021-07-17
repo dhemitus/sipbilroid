@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:sipbilroid/shareds/shareds.dart';
 
 class BaseInput extends StatelessWidget {
   final Function? listener;
@@ -43,8 +44,8 @@ class BaseInput extends StatelessWidget {
       cursorColor: Theme.of(context).colorScheme.inputCursor,
       controller: controller,
       maxLines: line,
-      style: Theme.of(context).textTheme.overlineStyle
-        .copyWith(color: Theme.of(context).colorScheme.inputStyle),
+      style: Theme.of(context).textTheme.regular14
+        .copyWith(color: Theme.of(context).colorScheme.inputText),
       obscureText: password,
       enabled: enable,
       onTap: onTap,
@@ -53,13 +54,13 @@ class BaseInput extends StatelessWidget {
       textInputAction: inputAction,
       keyboardType: inputType,
       decoration: InputDecoration(
-        fillColor: Theme.of(context).colorScheme.transparent,
+        fillColor: Theme.of(context).colorScheme.inputBackground,
         filled: true,
         contentPadding: EdgeInsets.all(0.0),
         labelText: label,
-        labelStyle: Theme.of(context).textTheme.overlineStyle
+        labelStyle: Theme.of(context).textTheme.regular14
           .copyWith(color: Theme.of(context).colorScheme.inputLabel),
-        hintStyle: Theme.of(context).textTheme.overlineStyle
+        hintStyle: Theme.of(context).textTheme.regular14
           .copyWith(color: Theme.of(context).colorScheme.inputHint),
         enabledBorder: border,
         disabledBorder: disabledBorder,

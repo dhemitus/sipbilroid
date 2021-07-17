@@ -9,7 +9,7 @@ class SipbilroidApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return Utils.initScreen(MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
+      title: 'SIP BILROID',
       theme: Themes.lightMode,
       home: InitScreen(),
     ));

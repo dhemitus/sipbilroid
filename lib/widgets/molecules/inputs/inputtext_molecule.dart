@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:sipbilroid/shareds/shareds.dart';
+import 'package:sipbilroid/widgets/widgets.dart';
 
 class InputText extends StatelessWidget {
   final Function? listener;
@@ -64,29 +66,29 @@ class InputText extends StatelessWidget {
           onChange: onChange,
           onSubmit: onSubmit,
           inputAction: inputAction,
-          border: border ?? UnderlineInputBorder(
+          border: border ?? OutlineInputBorder(
             borderSide: BorderSide(
-              width: 1.0,
-              color: Theme.of(context).colorScheme.inputBorder
-            )
+              color: Theme.of(context).colorScheme.inputBackground
+            ),
+            borderRadius: BorderRadius.circular(8.0)
           ),
-          disabledBorder: border ?? UnderlineInputBorder(
+          disabledBorder: border ?? OutlineInputBorder(
             borderSide: BorderSide(
-              width: 1.0,
-              color: Theme.of(context).colorScheme.inputBorder
-            )
+              color: Theme.of(context).colorScheme.inputBackground
+            ),
+            borderRadius: BorderRadius.circular(8.0)
           ),
-          focusBorder: border ?? UnderlineInputBorder(
+          focusBorder: border ?? OutlineInputBorder(
             borderSide: BorderSide(
-              width: 1.0,
-              color: Theme.of(context).colorScheme.inputBorder
-            )
+              color: Theme.of(context).colorScheme.inputBackground
+            ),
+            borderRadius: BorderRadius.circular(8.0)
           ),
         ),
         Row(
           children: warning ?? <Widget>[],
         ),
-        SizedBox(height: Dimension.smallSpace,)
+        SizedBox(height: 3.0,)
       ],
     );
   }
