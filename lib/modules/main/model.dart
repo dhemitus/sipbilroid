@@ -23,7 +23,7 @@ class MainModel extends Equatable {
   final List<MainModel>? list;
   final int? index;
 
-  MainModel({this.label, this.page, this.icon, this.activeIcon, this.message, this.list, this.index});
+  MainModel({this.label, this.page, this.icon, this.activeIcon, this.message, this.list, this.index = 0});
 
   BottomNavigationBarItem get item => BottomNavigationBarItem(icon: icon!, activeIcon: activeIcon!, label: label);
 

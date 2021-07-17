@@ -12,6 +12,8 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
+  late List<BottomNavigationBarItem> _tabs;
+  late MainModel _data;
 
   @override
   void initState() {
@@ -19,13 +21,25 @@ class _MainScreenState extends State<MainScreen> {
     BlocProvider.of<MainBloc>(context).add(OntabList());
   }
 
+  void _onChange(int i) {
+    BlocProvider.of<MainBloc>(context).add(OnTabIndex(_data.copyWith(index: i)));
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<MainBloc, MainState>(
       buildWhen: (previous, current) => previous.main != current.main,
       builder: (BuildContext context, MainState state) {
-        print(state.main.list);
-        return MainTemplate();
+        if(state.main.list != null && state.main.list!.isNotEmpty) {
+          _tabs = [];
+          _data = state.main;
+          state.main.list!.map((MainModel _item) {
+            _tabs.add(_item.item);
+          }).toList();
+          return MainTemplate(items: _tabs, index: state.main.index, onTap: _onChange,);
+        }
+        return Container();
+
       }
     );
   }
