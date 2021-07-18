@@ -30,5 +30,4 @@ class VehicleBloc extends Bloc<VehicleEvent, VehicleState> {
     VehicleModel _vehicle = await _repo.loadVehcles();
     yield this.state.copyWith(vehicle: _vehicle, status: VehicleStatus.DONE);
   }
-
 }

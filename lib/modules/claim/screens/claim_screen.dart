@@ -16,6 +16,7 @@ class _ClaimScreenState extends State<ClaimScreen> {
   Widget build(BuildContext context) {
     return ClaimTemplate(
       children: [
+        GasolineScreen(),
         Container()
       ],
     );
