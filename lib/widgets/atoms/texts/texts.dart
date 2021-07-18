@@ -1,5 +1,15 @@
+export './heavy8text_atom.dart';
+export './heavy10text_atom.dart';
+export './heavy12text_atom.dart';
 export './heavy13text_atom.dart';
+export './heavy13text_atom.dart';
+export './heavy15text_atom.dart';
 export './regular8text_atom.dart';
 export './regular9text_atom.dart';
 export './regular10text_atom.dart';
+export './regular11text_atom.dart';
+export './regular12text_atom.dart';
+export './regular13text_atom.dart';
 export './regular14text_atom.dart';
+export './regular16text_atom.dart';
+export './regular30text_atom.dart';

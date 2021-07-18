@@ -10,6 +10,8 @@ extension SIPColorScheme on ColorScheme {
   Color get defaultText => SIPColor.grey6C6C6C;
   Color get defaultBackground => Colors.white;
 
+  Color get blueCard => SIPColor.blue0053FF;
+
   Color get tabOff => SIPColor.grey6C6C6C;
   Color get tabOn => SIPColor.blue3170F3;
 

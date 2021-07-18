@@ -9,4 +9,5 @@ class SIPColor {
 
   static const Color blue3170F3 = Color(0xFF3170F3);
   static const Color blue0073DE = Color(0xFF0073DE);
+  static const Color blue0053FF = Color(0xFF0053FF);
 }
