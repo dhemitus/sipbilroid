@@ -30,14 +30,13 @@ class _OnBoardScreenState extends State<OnBoardScreen> {
       buildWhen: (previous, current) => previous.onboard != current.onboard,
       builder: (BuildContext context, OnBoardState state) {
         print(state.onboard.list);
-        return StackScaffold(
-          children: [
-            BaseContainer(
-              alignment: Alignment.center,
-            ),
-            SizedBox(height: 150,),
-            PrimaryButton(label: 'next', onTap: _onNext,)
-          ]
+        List<Widget> _list = [];
+        if(state.onboard.list != null && state.onboard.list!.isNotEmpty) {
+          state.onboard.list!.map((OnBoardModel e) => _list.add(e.image!)).toList();
+        }
+        return OnBoardTemplate(
+          children: _list,
+          onTap: _onNext
         );
       }
     );

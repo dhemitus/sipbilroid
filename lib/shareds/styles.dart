@@ -20,6 +20,14 @@ extension SIPTextTheme on TextTheme {
     )
   );
 
+  TextStyle get regular10 => GoogleFonts.nunitoSans(
+    textStyle: TextStyle(
+      fontSize: 10.0.sp,
+      letterSpacing: 0.4.sp,
+      fontWeight: FontWeight.w400
+    )
+  );
+
   TextStyle get regular9 => GoogleFonts.nunitoSans(
     textStyle: TextStyle(
       fontSize: 9.0.sp,

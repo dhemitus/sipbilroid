@@ -2,6 +2,8 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:sipbilroid/shareds/shareds.dart';
+import 'package:sipbilroid/widgets/atoms/atoms.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 enum OnBoardStatus {
   INIT,
@@ -11,9 +13,30 @@ enum OnBoardStatus {
 }
 
 List<OnBoardModel> onBoards = [
-  OnBoardModel(image: SVGS.onboard1, title: 'on board 1'),
-  OnBoardModel(image: SVGS.onboard2, title: 'on board 2'),
-  OnBoardModel(image: SVGS.onboard3, title: 'on board 3'),
+  OnBoardModel(
+    image: BaseContainer(
+      width: 200.w,
+      height: 300.w,
+      image: ImageUtils.imageAsset('assets/images/onboard1.png', fit: BoxFit.contain),
+    ),
+    title: 'on board 1'
+  ),
+  OnBoardModel(
+    image: BaseContainer(
+      width: 200.w,
+      height: 300.w,
+      image: ImageUtils.imageAsset('assets/images/onboard2.png', fit: BoxFit.contain),
+    ),
+    title: 'on board 2'
+  ),
+  OnBoardModel(
+    image: BaseContainer(
+      width: 200.w,
+      height: 300.w,
+      image: ImageUtils.imageAsset('assets/images/onboard3.png', fit: BoxFit.contain),
+    ),
+    title: 'on board 3'
+  ),
 ];
 
 class OnBoardModel extends Equatable {

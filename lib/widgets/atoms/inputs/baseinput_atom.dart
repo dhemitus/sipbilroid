@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sipbilroid/shareds/shareds.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class BaseInput extends StatelessWidget {
   final Function? listener;
@@ -56,7 +57,7 @@ class BaseInput extends StatelessWidget {
       decoration: InputDecoration(
         fillColor: Theme.of(context).colorScheme.inputBackground,
         filled: true,
-        contentPadding: EdgeInsets.all(0.0),
+        contentPadding: EdgeInsets.symmetric(horizontal: 14.0.w),
         labelText: label,
         labelStyle: Theme.of(context).textTheme.regular14
           .copyWith(color: Theme.of(context).colorScheme.inputLabel),
