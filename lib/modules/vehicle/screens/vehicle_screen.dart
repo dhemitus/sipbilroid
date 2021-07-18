@@ -22,7 +22,7 @@ class _VehicleScreenState extends State<VehicleScreen> {
     return BlocBuilder<VehicleBloc, VehicleState>(
       builder: (BuildContext context, VehicleState state) {
         print(state.vehicle.list);
-        return Container();
+        return HeaderCard();
       }
     );
   }

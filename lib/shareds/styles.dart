@@ -47,7 +47,7 @@ extension SIPTextTheme on TextTheme {
   TextStyle get regular30 => GoogleFonts.nunitoSans(
     textStyle: TextStyle(
       fontSize: 30.0.sp,
-      letterSpacing: 0.4.sp,
+      letterSpacing: 0.1.sp,
       fontWeight: FontWeight.w400
     )
   );

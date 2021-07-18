@@ -7,8 +7,9 @@ extension SIPColorScheme on ColorScheme {
   Color get default1Button => SIPColor.blue0073DE;
   Color get default2Button => SIPColor.grey002B90;
 
-  Color get defaultText => SIPColor.grey6C6C6C;
   Color get defaultBackground => Colors.white;
+  Color get labelText => Colors.white;
+  Color get defaultText => SIPColor.grey6C6C6C;
 
   Color get blueCard => SIPColor.blue0053FF;
 
