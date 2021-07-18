@@ -13,11 +13,25 @@ class CurrentScreen extends StatefulWidget {
 class _CurrentScreenState extends State<CurrentScreen> {
 
   @override
+  void initState() {
+    super.initState();
+    BlocProvider.of<ClaimBloc>(context).add(OnClaimList());
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return CurrentTemplate(
-      children: [
-        Container()
-      ],
+    return BlocBuilder<ClaimBloc, ClaimState>(
+      buildWhen: (previous, current) => previous.claim != current.claim,
+      builder:(BuildContext context, ClaimState state) {
+        if(state.status == ClaimStatus.DONE) {
+          print(state.claim);
+        }
+        return CurrentTemplate(
+          children: [
+            Container()
+          ],
+        );
+      }
     );
   }
 

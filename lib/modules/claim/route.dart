@@ -11,7 +11,7 @@ class ClaimRoutes {
   static const Key history = Key('__historyScreen__');
   static const Key detail = Key('__detailScreen__');
 
-//  static final BlocProvider bloc = BlocProvider<InitBloc>(
-//    create: (BuildContext context) => InitBloc(InitRepository())
-//  );
+  static final BlocProvider bloc = BlocProvider<ClaimBloc>(
+    create: (BuildContext context) => ClaimBloc(ClaimRepository())
+  );
 }

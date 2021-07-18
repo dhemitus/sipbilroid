@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:equatable/equatable.dart';
 
 enum ClaimStatus {
@@ -10,8 +12,9 @@ enum ClaimStatus {
 class ClaimModel extends Equatable {
   final DateTime? createdAt, updatedAt, tanggalKlaim;
   final int? id, satkerId, penggunakendaraan, penggunaId, kendaraanId;
-  final double? jumlahLiter, total;
+  final int? jumlahLiter, total;
   final String? createdBy, updatedBy, noKlaim, pengguna, nomorPolisi, status, lokasi, jenisBbm, struk, receipt, catatan, message;
+  final List<ClaimModel>? list;
 
   ClaimModel({
     this.message,
@@ -35,7 +38,8 @@ class ClaimModel extends Equatable {
     this.id,
     this.tanggalKlaim,
     this.updatedAt,
-    this.createdAt
+    this.createdAt,
+    this.list
   });
 
   copyWith({
@@ -51,8 +55,8 @@ class ClaimModel extends Equatable {
     String? noKlaim,
     String? updatedBy,
     String? createdBy,
-    double? total,
-    double? jumlahLiter,
+    int? total,
+    int? jumlahLiter,
     int? kendaraanId,
     int? penggunaId,
     int? penggunakendaraan,
@@ -60,7 +64,8 @@ class ClaimModel extends Equatable {
     int? id,
     DateTime? tanggalKlaim,
     DateTime? updatedAt,
-    DateTime? createdAt
+    DateTime? createdAt,
+    List<ClaimModel>? list
   }) => ClaimModel(
     message: message ?? this.message,
     catatan: catatan ?? this.catatan,
@@ -83,10 +88,65 @@ class ClaimModel extends Equatable {
     id: id ?? this.id,
     tanggalKlaim: tanggalKlaim ?? this.tanggalKlaim,
     updatedAt: updatedAt ?? this.updatedAt,
-    createdAt: createdAt ?? this.createdAt
+    createdAt: createdAt ?? this.createdAt,
+    list: list ?? this.list
   );
 
+  factory ClaimModel.fromJsonList(list) {
+    List<ClaimModel> _list = [];
+    list.map((_item) => _list.add(ClaimModel.fromJson(_item)) ).toList();
+
+    return ClaimModel(list: _list);
+  }
+
+  factory ClaimModel.fromJson(_json) => ClaimModel(
+    message: _json['message'] ?? null,
+    catatan: _json['catatan'] ?? null,
+    receipt: _json['receipt'] ?? null,
+    struk: _json['struk'] ?? null,
+    jenisBbm: _json['jenis_bbm'] ?? null,
+    lokasi: _json['lokasi'] ?? null,
+    status: _json['status'] ?? null,
+    nomorPolisi: _json['nomor_polisi'] ?? null,
+    pengguna: _json['pengguna'] ?? null,
+    noKlaim: _json['no_klaim'] ?? null,
+    updatedBy: _json['updatedBy'] ?? null,
+    createdBy: _json['createdBy'] ?? null,
+    total: _json['total'] ?? null,
+    jumlahLiter: _json['jumlah_liter'] ?? null,
+    kendaraanId: _json['kendaraan_id'] ?? null,
+    penggunaId: _json['pengguna_id'] ?? null,
+    penggunakendaraan: _json['penggunakendaraan'] ?? null,
+    satkerId: _json['satker_id'] ?? null,
+    id: _json['id'] ?? null,
+    tanggalKlaim: _json['tanggal_klaim'] != null ? DateTime.parse(_json['tanggal_klaim']) : null,
+    updatedAt: _json['updatedAt'] != null ? DateTime.parse(_json['updatedAt']) : null,
+    createdAt: _json['createdAt'] != null ? DateTime.parse(_json['createdAt']) : null
+  );
 
   @override
-  List<Object?> get props => [];
+  List<Object?> get props => [
+    message,
+    catatan,
+    receipt,
+    struk,
+    jenisBbm,
+    lokasi,
+    status,
+    nomorPolisi,
+    pengguna,
+    noKlaim,
+    updatedBy,
+    createdBy,
+    total,
+    jumlahLiter,
+    kendaraanId,
+    penggunaId,
+    penggunakendaraan,
+    satkerId,
+    id,
+    tanggalKlaim,
+    updatedAt,
+    createdAt
+  ];
 }
