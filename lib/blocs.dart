@@ -12,7 +12,8 @@ class Blocs {
         AuthenticationRoutes.bloc,
         MainRoutes.bloc,
         VehicleRoutes.bloc,
-        GasolineRoutes.bloc
+        GasolineRoutes.bloc,
+        HomeRoutes.bloc
       ], 
       child: child
     );

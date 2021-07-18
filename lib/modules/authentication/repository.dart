@@ -21,7 +21,7 @@ class AuthenticationRepository {
       if(_response.statusCode == 200) {
         Map _json = jsonDecode(_response.body);
         SharedPreferences _storage = await SharedPreferences.getInstance();
- 
+
         AuthenticationModel _auth = auth.copyWith(token: _json['token'], refreshToken: _json['refreshToken'], status: _json['status']);
 
         await _storage.setString('authentication', jsonEncode(_auth.toJson()));

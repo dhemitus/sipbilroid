@@ -12,5 +12,5 @@ class GasolineState extends Equatable {
   }) => GasolineState(gasoline ?? this.gasoline, status ?? this.status);
 
   @override
-  List<Object?> get props => [];
+  List<Object?> get props => [gasoline, status];
 }

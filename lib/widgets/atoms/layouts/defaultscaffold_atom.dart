@@ -12,7 +12,7 @@ class DefaultScaffold extends StatelessWidget {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.defaultBackground,
       extendBody: true,
-      body: child,
+      body: SingleChildScrollView(child: child),
     );
   }
 }

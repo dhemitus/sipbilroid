@@ -58,7 +58,6 @@ class VehicleModel extends Equatable {
 
   factory VehicleModel.fromJsonList(list) {
     List<VehicleModel> _list = [];
-    //print(list);
     list.map((_item) => _list.add(VehicleModel.fromJson(_item))).toList();
 
     return VehicleModel(list: _list);
