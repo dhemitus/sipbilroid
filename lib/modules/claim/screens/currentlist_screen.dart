@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 import 'package:sipbilroid/widgets/widgets.dart';
 import 'package:sipbilroid/modules/modules.dart';
 
@@ -23,11 +24,25 @@ class _CurrentListScreenState extends State<CurrentListScreen> {
       buildWhen: (previous, current) => previous.claim != current.claim,
       builder:(BuildContext context, ClaimState state) {
         print(state.claim);
+        List<Widget> _list = [];
+        if(state.claim.list != null && state.claim.list!.isNotEmpty) {
+          state.claim.list!.map((ClaimModel e) {
+            _list.add(ClaimCard(
+              claim: DateFormat('dd MMMM yyyy').format( e.tanggalKlaim!),
+              amount: e.total.toString(),
+              litre: e.jumlahLiter.toString(),
+              status: e.status,
+            ));
+          }).toList();
+        }
         return BottomCard(
           child: Column(
             children: [
               ResumeScreen(),
-              BaseContainer(height: 300,)
+              Column(
+                children: _list,
+              ),
+              BaseContainer(height: 70,)
             ]
           )
         );

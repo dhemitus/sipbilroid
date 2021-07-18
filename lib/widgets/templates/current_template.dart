@@ -11,6 +11,7 @@ class CurrentTemplate extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return  StackScaffold(
+      bottomExtension: 0,
       background: BaseContainer(
         image: ImageUtils.imageAsset('assets/images/dashboard.png', fit: BoxFit.cover),
       ),

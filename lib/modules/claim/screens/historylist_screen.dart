@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sipbilroid/widgets/widgets.dart';
 import 'package:sipbilroid/modules/modules.dart';
+import 'package:intl/intl.dart';
 
 class HistoryListScreen extends StatefulWidget {
   @override
@@ -22,11 +23,24 @@ class _HistoryListScreenState extends State<HistoryListScreen> {
     return BlocBuilder<ClaimBloc, ClaimState>(
       buildWhen: (previous, current) => previous.claim != current.claim,
       builder:(BuildContext context, ClaimState state) {
-        print(state.claim);
+        List<Widget> _list = [];
+        if(state.claim.list != null && state.claim.list!.isNotEmpty) {
+          state.claim.list!.map((ClaimModel e) {
+            _list.add(ClaimCard(
+              claim: DateFormat('dd MMMM yyyy').format( e.tanggalKlaim!),
+              amount: e.total.toString(),
+              litre: e.jumlahLiter.toString(),
+              status: e.status,
+            ));
+          }).toList();
+        }
         return BottomCard(
           child: Column(
             children: [
-              BaseContainer(height: 300,)
+              Column(
+                children: _list,
+              ),
+              BaseContainer(height: 70,)
             ]
           )
         );
