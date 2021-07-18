@@ -20,6 +20,7 @@ class _VehicleScreenState extends State<VehicleScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<VehicleBloc, VehicleState>(
+      buildWhen: (previous, current) => previous.vehicle != current.vehicle,
       builder: (BuildContext context, VehicleState state) {
         print(state.vehicle.list);
         List<Widget> _list = [];

@@ -4,34 +4,35 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sipbilroid/widgets/widgets.dart';
 import 'package:sipbilroid/modules/modules.dart';
 
-class DashboardScreen extends StatefulWidget {
+class HistoryListScreen extends StatefulWidget {
   @override
-  _DashboardScreenState createState() => _DashboardScreenState();
+  _HistoryListScreenState createState() => _HistoryListScreenState();
 }
 
-class _DashboardScreenState extends State<DashboardScreen> {
+class _HistoryListScreenState extends State<HistoryListScreen> {
 
   @override
   void initState() {
     super.initState();
-    BlocProvider.of<DashboardBloc>(context).add(OnDashboardList());
+    BlocProvider.of<ClaimBloc>(context).add(OnClaimPeriod('06-2021'));
   }
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<DashboardBloc, DashboardState>(
-      buildWhen: (previous, current) => previous.dashboard != current.dashboard,
-      builder: (BuildContext context, DashboardState state) {
+    return BlocBuilder<ClaimBloc, ClaimState>(
+      buildWhen: (previous, current) => previous.claim != current.claim,
+      builder:(BuildContext context, ClaimState state) {
+        print(state.claim);
         return BottomCard(
           child: Column(
             children: [
-              ResumeScreen(),
               BaseContainer(height: 300,)
             ]
           )
         );
       }
     );
+
   }
 
 }
