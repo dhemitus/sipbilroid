@@ -12,21 +12,24 @@ class VehicleRepository {
       String _string = _storage.getString('authentication')!;
 
       AuthenticationModel _auth = AuthenticationModel.fromString(_string);
-      print(_auth.authorization);
 
       Map<String, String> _headers = {
         'Authorization': _auth.authorization
       };
 
-      http.Response _response = await http.get(Uri.http(ConfigNet.DOMAIN, '${ConfigNet.MAIN_PATH}${ConfigNet.VERSION}${ConfigNet.VEHICLE_PATH}'),
+      http.Response _response = await http.get(
+        Uri.http(ConfigNet.DOMAIN, '${ConfigNet.MAIN_PATH}${ConfigNet.VERSION}${ConfigNet.VEHICLE_PATH}'),
         headers: _headers
       );
 
       if(_response.statusCode == 200) {
-        print(_response.body);
+        Map _json = jsonDecode(_response.body);
+        VehicleModel _vehicle = VehicleModel.fromJsonList(_json['data']);
+        return _vehicle;
+      } else {
+        throw VehicleException(VehicleModel(message: 'failed'));
       }
 
-      return VehicleModel();
     } catch (e){
       throw VehicleException(VehicleModel(message: e.toString()));
     }

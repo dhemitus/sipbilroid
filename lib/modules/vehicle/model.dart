@@ -9,7 +9,7 @@ enum VehicleStatus {
 
 class VehicleModel extends Equatable {
   final int? id, kendaraanId;
-  final double? totalKlaim, sisaAnggaranBulanan, anggaranBulanan, nilaiAnggaran;
+  final int? totalKlaim, sisaAnggaranBulanan, anggaranBulanan, nilaiAnggaran;
   final String? tipeKendaraan, jenisKendaraan, eselon, nomorPolisi, message;
   final List<VehicleModel>? list;
 
@@ -34,10 +34,10 @@ class VehicleModel extends Equatable {
     String? jenisKendaraan,
     String? tipeKendaraan,
     String? message,
-    double? nilaiAnggaran,
-    double? anggaranBulanan,
-    double? sisaAnggaranBulanan,
-    double? totalKlaim,
+    int? nilaiAnggaran,
+    int? anggaranBulanan,
+    int? sisaAnggaranBulanan,
+    int? totalKlaim,
     int? kendaraanId,
     int? id,
     List<VehicleModel>? list
@@ -54,6 +54,27 @@ class VehicleModel extends Equatable {
     kendaraanId: kendaraanId ?? this.kendaraanId,
     id: id ?? this.id,
     list: list ?? this.list
+  );
+
+  factory VehicleModel.fromJsonList(list) {
+    List<VehicleModel> _list = [];
+    //print(list);
+    list.map((_item) => _list.add(VehicleModel.fromJson(_item))).toList();
+
+    return VehicleModel(list: _list);
+  }
+
+  factory VehicleModel.fromJson(_json) => VehicleModel(
+    nomorPolisi: _json['nomor_polisi'] ?? null,
+    eselon: _json['eselon'] ?? null,
+    jenisKendaraan: _json['jenis_kendaraan'] ?? null,
+    tipeKendaraan: _json['tipe_kendaraan'] ?? null,
+    nilaiAnggaran: _json['nilai_anggaran'] ?? null,
+    anggaranBulanan: _json['anggaran_bulanan'] ?? null,
+    sisaAnggaranBulanan: _json['sisa_anggaran_bulanan'] ?? null,
+    totalKlaim: _json['total_klaim'] ?? null,
+    kendaraanId: _json['kendaraan_id'] ?? null,
+    id: _json['id'] ?? null
   );
 
   @override

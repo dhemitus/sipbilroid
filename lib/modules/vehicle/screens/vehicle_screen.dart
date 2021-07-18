@@ -21,7 +21,7 @@ class _VehicleScreenState extends State<VehicleScreen> {
   Widget build(BuildContext context) {
     return BlocBuilder<VehicleBloc, VehicleState>(
       builder: (BuildContext context, VehicleState state) {
-        print(state.vehicle);
+        print(state.vehicle.list);
         return Container();
       }
     );
