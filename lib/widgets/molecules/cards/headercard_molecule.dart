@@ -5,12 +5,24 @@ import 'package:sipbilroid/shareds/shareds.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class HeaderCard extends StatelessWidget {
+  final String? plate, type, vehicle;
+
+  HeaderCard({this.vehicle, this.type, this.plate});
 
   @override
   Widget build(BuildContext context) {
+    String _vehicle = 'bike';
+
+    if(vehicle == 'MOBIL') {
+      _vehicle = 'car';
+    } else {
+      _vehicle = 'bike';
+    }
+
     return BaseContainer(
       height: 132.0.w,
       width: 272.0.w,
+      margin: EdgeInsets.only(bottom: 18.0.w),
       alignment: Alignment.centerLeft,
       padding: EdgeInsets.symmetric(vertical: 8.0.w, horizontal: 18.0.w),
       color: Theme.of(context).colorScheme.blueCard.withOpacity(.9),
@@ -22,15 +34,15 @@ class HeaderCard extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                Regular30Text('B 1331 PWW', color: Theme.of(context).colorScheme.labelText,),
-                Regular10Text('hshis', color: Theme.of(context).colorScheme.labelText,),
+                Regular30Text(plate ?? '', color: Theme.of(context).colorScheme.labelText,),
+                Regular10Text(type ?? '', color: Theme.of(context).colorScheme.labelText,),
               ],
             )
           ),
           BaseContainer(
             width: 90.0.w,
             height: 60.0.w,
-            image: ImageUtils.imageAsset('assets/images/bike.png', fit: BoxFit.contain),
+            image: ImageUtils.imageAsset('assets/images/$_vehicle.png', fit: BoxFit.contain),
           )
         ],
       ),

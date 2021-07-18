@@ -22,7 +22,17 @@ class _VehicleScreenState extends State<VehicleScreen> {
     return BlocBuilder<VehicleBloc, VehicleState>(
       builder: (BuildContext context, VehicleState state) {
         print(state.vehicle.list);
-        return HeaderCard();
+        List<Widget> _list = [];
+
+        if(state.vehicle.list != null && state.vehicle.list!.isNotEmpty) {
+          state.vehicle.list!.map((VehicleModel e) { 
+            _list.add(HeaderCard(plate: e.nomorPolisi, type: e.jenisKendaraan, vehicle: e.tipeKendaraan,));
+          }).toList();
+        }
+
+        return VehicleContainer(
+          items: _list,
+        );
       }
     );
   }

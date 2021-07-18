@@ -27,7 +27,8 @@ class HeaderBar extends StatelessWidget {
             ),
           ),
           SizedBox(height: 18.0.w,),
-          Heavy15Text(title ?? '')
+          Heavy15Text(title ?? ''),
+          SizedBox(height: 8.0.w,)
         ],
       ),
     );
