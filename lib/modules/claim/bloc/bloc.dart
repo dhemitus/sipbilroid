@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:sipbilroid/modules/modules.dart';
@@ -22,12 +24,24 @@ class ClaimBloc extends Bloc<ClaimEvent, ClaimState> {
     if(event is OnClaimList) {
       yield* _loadList();
     }
+
+    if(event is OnClaimPeriod) {
+      yield* _loadPeriod(event);
+    }
   }
 
   Stream<ClaimState> _loadList() async* {
     yield this.state.copyWith(status: ClaimStatus.LOADING);
 
     ClaimModel _claim = await _repo.loadList();
+
+    yield this.state.copyWith(claim: _claim, status: ClaimStatus.DONE);
+  }
+
+  Stream<ClaimState> _loadPeriod(OnClaimPeriod event) async* {
+    yield this.state.copyWith(status: ClaimStatus.LOADING);
+
+    ClaimModel _claim = await _repo.loadPeriod(event.period);
 
     yield this.state.copyWith(claim: _claim, status: ClaimStatus.DONE);
   }

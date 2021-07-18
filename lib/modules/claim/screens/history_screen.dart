@@ -13,12 +13,25 @@ class HistoryScreen extends StatefulWidget {
 class _HistoryScreenState extends State<HistoryScreen> {
 
   @override
+  void initState() {
+    super.initState();
+    BlocProvider.of<ClaimBloc>(context).add(OnClaimPeriod('06-2021'));
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return HistoryTemplate(
-      children: [
-        Container()
-      ],
+    return BlocBuilder<ClaimBloc, ClaimState>(
+      buildWhen: (previous, current) => previous.claim != current.claim,
+      builder:(BuildContext context, ClaimState state) {
+        print(state.claim);
+        return HistoryTemplate(
+          children: [
+            Container()
+          ],
+        );
+      }
     );
+
   }
 
 }

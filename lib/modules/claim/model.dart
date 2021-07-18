@@ -147,6 +147,7 @@ class ClaimModel extends Equatable {
     id,
     tanggalKlaim,
     updatedAt,
-    createdAt
+    createdAt,
+    list
   ];
 }

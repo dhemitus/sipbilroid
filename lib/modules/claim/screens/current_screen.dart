@@ -23,9 +23,7 @@ class _CurrentScreenState extends State<CurrentScreen> {
     return BlocBuilder<ClaimBloc, ClaimState>(
       buildWhen: (previous, current) => previous.claim != current.claim,
       builder:(BuildContext context, ClaimState state) {
-        if(state.status == ClaimStatus.DONE) {
-          print(state.claim);
-        }
+        print(state.claim);
         return CurrentTemplate(
           children: [
             Container()
