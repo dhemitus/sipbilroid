@@ -26,7 +26,17 @@ class _DashboardScreenState extends State<DashboardScreen> {
           child: Column(
             children: [
               ResumeScreen(),
-              BaseContainer(height: 300,)
+              MonthlyCard(
+                month: state.dashboard.monthly!.bulan!,
+                amount: state.dashboard.monthly!.totalKlaim!.toString(),
+                transaction: state.dashboard.monthly!.jumlahKlaim!.toString()
+              ),
+              AnnualCard(
+                month: state.dashboard.annual!.bulan!,
+                amount: state.dashboard.annual!.totalKlaim!.toString(),
+                transaction: state.dashboard.annual!.jumlahKlaim!.toString()
+              ),
+              BaseContainer(height: 70,)
             ]
           )
         );
