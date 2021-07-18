@@ -13,12 +13,23 @@ class ClientScreen extends StatefulWidget {
 class _ClientScreenState extends State<ClientScreen> {
 
   @override
-  Widget build(BuildContext context) {
-    return ClientTemplate(
-      children: [
-        Container()
-      ],
-    );
+  void initState() {
+    super.initState();
+    BlocProvider.of<ClientBloc>(context).add(OnClientDetail());
   }
 
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<ClientBloc, ClientState>(
+      buildWhen: (previous, current) => previous.client != current.client,
+      builder: (BuildContext context, ClientState state) {
+        print(state.client);
+        return ClientTemplate(
+          children: [
+            Container()
+          ],
+        );
+      }
+    );
+  }
 }

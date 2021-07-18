@@ -6,7 +6,7 @@ class ClientRoutes {
   static const String path = '/client';
   static const Key key = Key('__clientScreen__');
 
-//  static final BlocProvider bloc = BlocProvider<InitBloc>(
-//    create: (BuildContext context) => InitBloc(InitRepository())
-//  );
+  static final BlocProvider bloc = BlocProvider<ClientBloc>(
+    create: (BuildContext context) => ClientBloc(ClientRepository())
+  );
 }

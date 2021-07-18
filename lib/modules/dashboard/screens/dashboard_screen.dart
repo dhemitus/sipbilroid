@@ -26,7 +26,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
         return Container();
       }
     );
-    return Container();
   }
 
 }

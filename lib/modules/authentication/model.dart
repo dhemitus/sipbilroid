@@ -23,6 +23,7 @@ class AuthenticationModel extends Equatable {
 
   @override
   List<Object?> get props => [phone, password, newPassword, token, refreshToken, status, message];
+
   Map<String, String> toLogin() => {
     'phone': phone!,
     'password': password!

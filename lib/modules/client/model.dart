@@ -45,6 +45,18 @@ class ClientModel extends Equatable {
     id: id ?? this.id
   );
 
+  factory ClientModel.fromJson(_json) => ClientModel(
+    message: _json['message'] ?? null,
+    satker: _json['satker'] ?? null,
+    eselon: _json['eselon'] ?? null,
+    nik: _json['nik'] ?? null,
+    phone: _json['phone'] ?? null,
+    name: _json['name'] ?? null,
+    satkerId: _json['satker_id'] ?? null,
+    status: _json['status'] ?? null,
+    id: _json['id'] ?? null
+  );
+
   @override
   List<Object?> get props => [message, satker, eselon, nik, phone, name, satkerId, status, id];
 }

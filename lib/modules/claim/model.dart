@@ -1,5 +1,5 @@
 import 'dart:convert';
-
+import 'package:intl/intl.dart';
 import 'package:equatable/equatable.dart';
 
 enum ClaimStatus {
@@ -123,6 +123,16 @@ class ClaimModel extends Equatable {
     updatedAt: _json['updatedAt'] != null ? DateTime.parse(_json['updatedAt']) : null,
     createdAt: _json['createdAt'] != null ? DateTime.parse(_json['createdAt']) : null
   );
+
+  Map<String, dynamic> toClaim() => {
+    'kendaraan_id': kendaraanId!,
+    'tanggal_klaim': DateFormat('yyyy-mm-dd').format(tanggalKlaim!),
+    'lokasi': lokasi!,
+    'jenis_bbm': jenisBbm!,
+    'jumlah_liter': jumlahLiter!,
+    'total': total!,
+    'receipt': receipt!
+  };
 
   @override
   List<Object?> get props => [
