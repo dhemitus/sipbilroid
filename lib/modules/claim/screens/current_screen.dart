@@ -26,6 +26,8 @@ class _CurrentScreenState extends State<CurrentScreen> {
         print(state.claim);
         return CurrentTemplate(
           children: [
+            HeaderScreen(title: 'CURRENT MONTH',),
+            VehicleScreen(),
             Container()
           ],
         );

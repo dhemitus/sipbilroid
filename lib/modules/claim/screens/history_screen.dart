@@ -26,6 +26,8 @@ class _HistoryScreenState extends State<HistoryScreen> {
         print(state.claim);
         return HistoryTemplate(
           children: [
+            HeaderScreen(title: 'HISTORY',),
+            VehicleScreen(),
             Container()
           ],
         );
