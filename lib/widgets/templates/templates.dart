@@ -6,3 +6,4 @@ export './client_template.dart';
 export './current_template.dart';
 export './history_template.dart';
 export './onboard_template.dart';
+export './claim_template.dart';

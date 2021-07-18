@@ -7,6 +7,10 @@ class Routes {
     InitRoutes.path: (BuildContext context) => InitScreen(),
     OnBoardRoutes.path: (BuildContext context) => OnBoardScreen(),
     AuthenticationRoutes.path: (BuildContext context) => LoginScreen(),
-    MainRoutes.path: (BuildContext context) => MainScreen()
+    MainRoutes.path: (BuildContext context) => MainScreen(),
+    ClaimRoutes.claimPath: (BuildContext context) => ClaimScreen(),
+    ClaimRoutes.currentPath: (BuildContext context) => CurrentScreen(),
+    ClaimRoutes.historyPath: (BuildContext context) => HistoryScreen(),
+    HomeRoutes.path: (BuildContext context) => HomeScreen(),
   };
 }

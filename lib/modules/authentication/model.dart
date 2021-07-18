@@ -62,7 +62,7 @@ class AuthenticationModel extends Equatable {
 
   String get authorization => 'Bearer $token';
 
-  factory AuthenticationModel.fromJson(Map<String, String> _json) => AuthenticationModel(
+  factory AuthenticationModel.fromJson(Map<String, dynamic> _json) => AuthenticationModel(
     message: _json['message'] ?? null,
     status: _json['status'] ?? null,
     refreshToken: _json['refreshToken'] ?? null,

@@ -10,7 +10,8 @@ class Blocs {
         InitRoutes.bloc,
         OnBoardRoutes.bloc,
         AuthenticationRoutes.bloc,
-        MainRoutes.bloc
+        MainRoutes.bloc,
+        VehicleRoutes.bloc
       ], 
       child: child
     );

@@ -11,6 +11,7 @@ class VehicleModel extends Equatable {
   final int? id, kendaraanId;
   final double? totalKlaim, sisaAnggaranBulanan, anggaranBulanan, nilaiAnggaran;
   final String? tipeKendaraan, jenisKendaraan, eselon, nomorPolisi, message;
+  final List<VehicleModel>? list;
 
   VehicleModel({
     this.nomorPolisi = '',
@@ -23,7 +24,8 @@ class VehicleModel extends Equatable {
     this.sisaAnggaranBulanan,
     this.totalKlaim,
     this.kendaraanId,
-    this.id
+    this.id,
+    this.list
   });
 
   VehicleModel copyWith({
@@ -37,7 +39,8 @@ class VehicleModel extends Equatable {
     double? sisaAnggaranBulanan,
     double? totalKlaim,
     int? kendaraanId,
-    int? id
+    int? id,
+    List<VehicleModel>? list
   }) => VehicleModel(
     nomorPolisi: nomorPolisi ?? this.nomorPolisi,
     eselon: eselon ?? this.eselon,
@@ -49,7 +52,8 @@ class VehicleModel extends Equatable {
     sisaAnggaranBulanan: sisaAnggaranBulanan ?? this.sisaAnggaranBulanan,
     totalKlaim: totalKlaim ?? this.totalKlaim,
     kendaraanId: kendaraanId ?? this.kendaraanId,
-    id: id ?? this.id
+    id: id ?? this.id,
+    list: list ?? this.list
   );
 
   @override
@@ -62,6 +66,7 @@ class VehicleModel extends Equatable {
     tipeKendaraan,
     jenisKendaraan,
     eselon,
-    nomorPolisi
+    nomorPolisi,
+    list
   ];
 }

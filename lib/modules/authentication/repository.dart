@@ -24,8 +24,7 @@ class AuthenticationRepository {
  
         AuthenticationModel _auth = auth.copyWith(token: _json['token'], refreshToken: _json['refreshToken'], status: _json['status']);
 
-        bool _save = await _storage.setString('authentication', jsonEncode(_auth.toJson()));
-        print(_save);
+        await _storage.setString('authentication', jsonEncode(_auth.toJson()));
         return _auth;
       } else {
         throw auth.copyWith(message: 'failed');

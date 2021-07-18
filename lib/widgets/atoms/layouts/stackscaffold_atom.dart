@@ -6,9 +6,9 @@ class StackScaffold extends StatelessWidget {
   final List<Widget>? children;
   final EdgeInsetsGeometry? padding;
   final double bottomExtension;
-  final Widget? header;
+  final Widget? header, background;
 
-  StackScaffold({this.children, this.padding, this.bottomExtension = 110, this.header});
+  StackScaffold({this.children, this.padding, this.bottomExtension = 110, this.header, this.background});
 
   @override
   Widget build(BuildContext context) {
@@ -19,6 +19,7 @@ class StackScaffold extends StatelessWidget {
       body: Stack(
         alignment: Alignment.topLeft,
         children: <Widget>[
+          background ?? Container(),
           SingleChildScrollView(
             padding: padding,
             child: Column(

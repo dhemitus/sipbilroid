@@ -14,6 +14,7 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   late List<BottomNavigationBarItem> _tabs;
   late MainModel _data;
+  late List<Widget> _pages;
 
   @override
   void initState() {
@@ -32,11 +33,13 @@ class _MainScreenState extends State<MainScreen> {
       builder: (BuildContext context, MainState state) {
         if(state.main.list != null && state.main.list!.isNotEmpty) {
           _tabs = [];
+          _pages = [];
           _data = state.main;
           state.main.list!.map((MainModel _item) {
             _tabs.add(_item.item);
+            _pages.add(_item.page!);
           }).toList();
-          return MainTemplate(items: _tabs, index: state.main.index, onTap: _onChange,);
+          return MainTemplate(items: _tabs, index: state.main.index, onTap: _onChange, child: _pages[state.main.index!],);
         }
         return Container();
 

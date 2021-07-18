@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:sipbilroid/modules/modules.dart';
 
 enum MainStatus {
   INIT,
@@ -10,11 +11,11 @@ enum MainStatus {
 }
 
 List<MainModel> tabsList = [
-  MainModel(label: 'Home', activeIcon: Icon(Icons.home), icon: Icon(Icons.home_outlined)),
-  MainModel(label: 'Current Month', activeIcon: Icon(Icons.book), icon: Icon(Icons.book_outlined)),
-  MainModel(label: '', activeIcon: Icon(Icons.add_box), icon: Icon(Icons.add_box)),
-  MainModel(label: 'History', activeIcon: Icon(Icons.history), icon: Icon(Icons.history_outlined)),
-  MainModel(label: 'User', activeIcon: Icon(Icons.people), icon: Icon(Icons.people_outlined)),
+  MainModel(label: 'Home', activeIcon: Icon(Icons.home), icon: Icon(Icons.home_outlined), page: HomeScreen()),
+  MainModel(label: 'Current Month', activeIcon: Icon(Icons.book), icon: Icon(Icons.book_outlined), page: CurrentScreen()),
+  MainModel(label: '', activeIcon: Icon(Icons.add_box), icon: Icon(Icons.add_box), page: ClaimScreen()),
+  MainModel(label: 'History', activeIcon: Icon(Icons.history), icon: Icon(Icons.history_outlined), page: HistoryScreen()),
+  MainModel(label: 'User', activeIcon: Icon(Icons.people), icon: Icon(Icons.people_outlined), page: ClientScreen()),
 ];
 
 class MainModel extends Equatable {
