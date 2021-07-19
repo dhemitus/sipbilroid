@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sipbilroid/widgets/widgets.dart';
 import 'package:sipbilroid/modules/modules.dart';
+import 'package:sipbilroid/shareds/shareds.dart';
 
 class ResumeScreen extends StatelessWidget {
 
@@ -16,7 +17,7 @@ class ResumeScreen extends StatelessWidget {
         if(state.vehicle.list != null && state.vehicle.list!.isNotEmpty) {
           _current = state.vehicle.list![state.index].sisaAnggaranBulanan!;
         }
-        return ResumeText(title: 'SISA ANGGARAN BULANAN', money: _current.toString(),);
+        return ResumeText(title: 'SISA ANGGARAN BULANAN', money: Format.currency().format(_current),);
       }
     );
 

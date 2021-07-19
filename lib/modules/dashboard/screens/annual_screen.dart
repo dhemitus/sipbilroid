@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sipbilroid/widgets/widgets.dart';
 import 'package:sipbilroid/modules/modules.dart';
+import 'package:sipbilroid/shareds/shareds.dart';
 
 class AnnualScreen extends StatelessWidget {
   late String _month, _amount, _transaction;
@@ -19,7 +20,7 @@ class AnnualScreen extends StatelessWidget {
 
         if(state.dashboard.annual != null) {
           _month = state.dashboard.annual!.bulan!;
-          _amount = state.dashboard.annual!.totalKlaim!.toString();
+          _amount = Format.currency().format(state.dashboard.annual!.totalKlaim!);
           _transaction = state.dashboard.annual!.jumlahKlaim!.toString();
         }
 

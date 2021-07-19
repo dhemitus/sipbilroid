@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:sipbilroid/widgets/widgets.dart';
 import 'package:sipbilroid/modules/modules.dart';
+import 'package:sipbilroid/shareds/shareds.dart';
 
 class CurrentListScreen extends StatefulWidget {
   @override
@@ -28,7 +29,7 @@ class _CurrentListScreenState extends State<CurrentListScreen> {
           state.claim.list!.map((ClaimModel e) {
             _list.add(ClaimCard(
               claim: DateFormat('dd MMMM yyyy').format( e.tanggalKlaim!),
-              amount: e.total.toString(),
+              amount: Format.currency().format(e.total),
               litre: e.jumlahLiter.toString(),
               status: e.status,
             ));

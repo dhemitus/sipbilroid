@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sipbilroid/widgets/widgets.dart';
 import 'package:sipbilroid/modules/modules.dart';
-import 'package:intl/intl.dart';
+import 'package:sipbilroid/shareds/shareds.dart';
 
 class HistoryListScreen extends StatefulWidget {
   @override
@@ -11,11 +11,29 @@ class HistoryListScreen extends StatefulWidget {
 }
 
 class _HistoryListScreenState extends State<HistoryListScreen> {
-
+  late List<DateTime> _dates;
   @override
   void initState() {
     super.initState();
-    BlocProvider.of<ClaimBloc>(context).add(OnClaimPeriod('06-2021'));
+    _parseDate();
+
+    BlocProvider.of<ClaimBloc>(context).add(OnClaimPeriod(Format.shortMonth().format(_dates[0])));
+  }
+
+  _onChange(DateTime e) {
+    print(Format.shortMonth().format(e));
+    BlocProvider.of<ClaimBloc>(context).add(OnClaimPeriod(Format.shortMonth().format(e)));
+  }
+
+  _parseDate() {
+    DateTime _date = DateTime.now();
+    print(_date.month);
+    _dates = [];
+    int _i;
+    for(_i = _date.month-1; _i >= 1; _i--) {
+      _dates.add(DateTime(_date.year, _i, 1));
+    }
+
   }
 
   @override
@@ -27,8 +45,8 @@ class _HistoryListScreenState extends State<HistoryListScreen> {
         if(state.claim.list != null && state.claim.list!.isNotEmpty) {
           state.claim.list!.map((ClaimModel e) {
             _list.add(ClaimCard(
-              claim: DateFormat('dd MMMM yyyy').format( e.tanggalKlaim!),
-              amount: e.total.toString(),
+              claim: Format.fullDate().format( e.tanggalKlaim!),
+              amount: Format.currency().format(e.total),
               litre: e.jumlahLiter.toString(),
               status: e.status,
             ));
@@ -37,6 +55,7 @@ class _HistoryListScreenState extends State<HistoryListScreen> {
         return BottomCard(
           child: Column(
             children: [
+              HistoryForm(items: _dates, value: _dates[0], onChange: _onChange),
               Column(
                 children: _list,
               ),

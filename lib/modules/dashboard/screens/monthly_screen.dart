@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sipbilroid/widgets/widgets.dart';
 import 'package:sipbilroid/modules/modules.dart';
+import 'package:sipbilroid/shareds/shareds.dart';
 
 class MonthlyScreen extends StatelessWidget {
   late String _month, _amount, _transaction;
@@ -19,7 +20,7 @@ class MonthlyScreen extends StatelessWidget {
 
         if(state.dashboard.monthly != null) {
           _month = state.dashboard.monthly!.bulan!;
-          _amount = state.dashboard.monthly!.totalKlaim!.toString();
+          _amount = Format.currency().format(state.dashboard.monthly!.totalKlaim!);
           _transaction = state.dashboard.monthly!.jumlahKlaim!.toString();
         }
 
