@@ -23,7 +23,6 @@ class _CurrentListScreenState extends State<CurrentListScreen> {
     return BlocBuilder<ClaimBloc, ClaimState>(
       buildWhen: (previous, current) => previous.claim != current.claim,
       builder:(BuildContext context, ClaimState state) {
-        print(state.claim);
         List<Widget> _list = [];
         if(state.claim.list != null && state.claim.list!.isNotEmpty) {
           state.claim.list!.map((ClaimModel e) {

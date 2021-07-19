@@ -19,28 +19,15 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<DashboardBloc, DashboardState>(
-      buildWhen: (previous, current) => previous.dashboard != current.dashboard,
-      builder: (BuildContext context, DashboardState state) {
-        return BottomCard(
-          child: Column(
-            children: [
-              ResumeScreen(),
-              MonthlyCard(
-                month: state.dashboard.monthly!.bulan!,
-                amount: state.dashboard.monthly!.totalKlaim!.toString(),
-                transaction: state.dashboard.monthly!.jumlahKlaim!.toString()
-              ),
-              AnnualCard(
-                month: state.dashboard.annual!.bulan!,
-                amount: state.dashboard.annual!.totalKlaim!.toString(),
-                transaction: state.dashboard.annual!.jumlahKlaim!.toString()
-              ),
-              BaseContainer(height: 70,)
-            ]
-          )
-        );
-      }
+    return BottomCard(
+      child: Column(
+        children: [
+          ResumeScreen(),
+          MonthlyScreen(),
+          AnnualScreen(),
+          BaseContainer(height: 70,)
+        ]
+      )
     );
   }
 
