@@ -28,6 +28,18 @@ class ClaimBloc extends Bloc<ClaimEvent, ClaimState> {
     if(event is OnClaimPeriod) {
       yield* _loadPeriod(event);
     }
+
+    if(event is OnClaimPost) {
+      yield* _postClaim(event);
+    }
+
+  }
+
+  Stream<ClaimState> _postClaim(OnClaimPost event) async* {
+    yield this.state.copyWith(status: ClaimStatus.LOADING);
+    ClaimModel _claim = await _repo.sendClaim(event.claim);
+
+    yield this.state.copyWith(claim:_claim, status: ClaimStatus.DONE);
   }
 
   Stream<ClaimState> _loadList() async* {

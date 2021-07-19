@@ -16,6 +16,7 @@ class InputText extends StatelessWidget {
   final TextInputAction? inputAction;
   final InputBorder? border, focusBorder, disabledBorder;
   final List<Widget>? warning;
+  final Color? fill;
 
   InputText({
     this.listener,
@@ -38,6 +39,7 @@ class InputText extends StatelessWidget {
     this.border,
     this.focusBorder,
     this.disabledBorder,
+    this.fill,
     this.onTap,
     this.warning = const []
   });
@@ -66,21 +68,22 @@ class InputText extends StatelessWidget {
           onChange: onChange,
           onSubmit: onSubmit,
           inputAction: inputAction,
+          fill: fill ?? Theme.of(context).colorScheme.inputBackground.withOpacity(.2),
           border: border ?? OutlineInputBorder(
             borderSide: BorderSide(
-              color: Theme.of(context).colorScheme.inputBackground
+              color: Theme.of(context).colorScheme.inputBackground.withOpacity(.2)
             ),
             borderRadius: BorderRadius.circular(8.0)
           ),
           disabledBorder: border ?? OutlineInputBorder(
             borderSide: BorderSide(
-              color: Theme.of(context).colorScheme.inputBackground
+              color: Theme.of(context).colorScheme.inputBackground.withOpacity(.2)
             ),
             borderRadius: BorderRadius.circular(8.0)
           ),
           focusBorder: border ?? OutlineInputBorder(
             borderSide: BorderSide(
-              color: Theme.of(context).colorScheme.inputBackground
+              color: Theme.of(context).colorScheme.inputBackground.withOpacity(.2)
             ),
             borderRadius: BorderRadius.circular(8.0)
           ),

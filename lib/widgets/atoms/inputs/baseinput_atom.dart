@@ -15,6 +15,7 @@ class BaseInput extends StatelessWidget {
   final ValueChanged<String>? onChange, onSubmit;
   final TextInputAction? inputAction;
   final InputBorder? border, focusBorder, disabledBorder;
+  final Color? fill;
 
   BaseInput({
     this.listener,
@@ -36,6 +37,7 @@ class BaseInput extends StatelessWidget {
     this.border,
     this.focusBorder,
     this.disabledBorder,
+    this.fill,
     this.onTap
   });
   @override
@@ -55,7 +57,7 @@ class BaseInput extends StatelessWidget {
       textInputAction: inputAction,
       keyboardType: inputType,
       decoration: InputDecoration(
-        fillColor: Theme.of(context).colorScheme.inputBackground,
+        fillColor: fill,
         filled: true,
         contentPadding: EdgeInsets.symmetric(horizontal: 14.0.w),
         labelText: label,

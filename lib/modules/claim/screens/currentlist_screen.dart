@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:intl/intl.dart';
 import 'package:sipbilroid/widgets/widgets.dart';
 import 'package:sipbilroid/modules/modules.dart';
 import 'package:sipbilroid/shareds/shareds.dart';
@@ -28,7 +27,7 @@ class _CurrentListScreenState extends State<CurrentListScreen> {
         if(state.claim.list != null && state.claim.list!.isNotEmpty) {
           state.claim.list!.map((ClaimModel e) {
             _list.add(ClaimCard(
-              claim: DateFormat('dd MMMM yyyy').format( e.tanggalKlaim!),
+              claim: Format.fullDate().format( e.tanggalKlaim!),
               amount: Format.currency().format(e.total),
               litre: e.jumlahLiter.toString(),
               status: e.status,

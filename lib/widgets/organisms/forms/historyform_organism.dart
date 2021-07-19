@@ -14,7 +14,7 @@ class HistoryForm extends StatelessWidget {
   Widget build(BuildContext context) {
     return BaseContainer(
       margin: EdgeInsets.only(left: 30.0.w, top: 16.0.w),
-      child: DropMenuButton(title: 'Period Bulan: ', value: value, items: items, onChange: onChange,)
+      child: PeriodButton(title: 'Period Bulan: ', value: value, items: items, onChange: onChange,)
     );
   }
 }

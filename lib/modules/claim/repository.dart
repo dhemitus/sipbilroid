@@ -6,6 +6,33 @@ import 'package:sipbilroid/shareds/shareds.dart';
 
 class ClaimRepository {
 
+  Future<ClaimModel> sendClaim(Map<String, dynamic> data) async {
+    try {
+      SharedPreferences _storage = await SharedPreferences.getInstance();
+      String _string = _storage.getString('authentication')!;
+
+      AuthenticationModel _auth = AuthenticationModel.fromString(_string);
+
+      Map<String, String> _headers = {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Authorization': _auth.authorization
+      };
+      http.Response _response = await http.post(
+        Uri.http(ConfigNet.DOMAIN, '${ConfigNet.MAIN_PATH}${ConfigNet.VERSION}${ConfigNet.CLAIM_REQUEST_PATH}'),
+        headers: _headers,
+        body: data
+      );
+      
+        print(_response.body);
+      if(_response.statusCode == 200) {
+        print(data);
+      }
+      return ClaimModel();
+    } catch(e) {
+      throw ClaimException(ClaimModel(message: e.toString()));
+    }
+  }
+
   Future<ClaimModel> loadList() async {
     try {
       SharedPreferences _storage = await SharedPreferences.getInstance();

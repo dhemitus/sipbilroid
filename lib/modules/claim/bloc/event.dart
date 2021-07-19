@@ -20,3 +20,12 @@ class OnClaimDetail extends ClaimEvent {
   @override
   List<String> get props => [id];
 }
+
+class OnClaimPost extends ClaimEvent {
+  final Map<String, dynamic> claim;
+
+  OnClaimPost(this.claim);
+
+  @override
+  List<Map<String, dynamic>> get props => [claim];
+}

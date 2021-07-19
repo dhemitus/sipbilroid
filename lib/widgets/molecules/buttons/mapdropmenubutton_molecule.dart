@@ -4,13 +4,13 @@ import 'package:sipbilroid/shareds/shareds.dart';
 import 'package:sipbilroid/widgets/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class DropMenuButton extends StatelessWidget {
+class MapDropMenuButton extends StatelessWidget {
   final String? title;
-  final String? value;
-  final List<String>? items;
+  final Map<String, dynamic>? value;
+  final List<Map<String, dynamic>>? items;
   final Function? onChange;
 
-  DropMenuButton({this.onChange, this.items = const [], this.value, this.title});
+  MapDropMenuButton({this.onChange, this.items = const [], this.value, this.title});
 
   @override
   Widget build(BuildContext context) {
@@ -19,14 +19,14 @@ class DropMenuButton extends StatelessWidget {
       children: <Widget>[
         Regular9Text(title ?? '', color: Theme.of(context).colorScheme.tabOn),
         BaseContainer(
-          child: DropdownButtonFormField<String>(
+          child: DropdownButtonFormField<Map<String, dynamic>>(
             iconEnabledColor: Theme.of(context).colorScheme.tabOn,
             iconDisabledColor: Theme.of(context).colorScheme.tabOn,
-            disabledHint: Regular14Text(value!, color: Theme.of(context).colorScheme.inputText),
+            disabledHint: Regular14Text(value!['plate']!, color: Theme.of(context).colorScheme.inputText),
             value: value,
-            onChanged: (String? val) => onChange?.call(val!),
-            items: items!.map<DropdownMenuItem<String>>((String item) {
-              return DropdownMenuItem(child: Regular14Text(item, color: Theme.of(context).colorScheme.inputText), value: item,);
+            onChanged: (Map<String, dynamic>? val) => onChange?.call(val!),
+            items: items!.map<DropdownMenuItem<Map<String, dynamic>>>((Map<String, dynamic> item) {
+              return DropdownMenuItem(child: Regular14Text(item['plate'], color: Theme.of(context).colorScheme.inputText), value: item,);
             }).toList(),
             decoration: InputDecoration(
               filled: true,
