@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sipbilroid/widgets/widgets.dart';
 import 'package:sipbilroid/modules/modules.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 
 class VehicleScreen extends StatefulWidget {
   @override
@@ -10,6 +11,10 @@ class VehicleScreen extends StatefulWidget {
 }
 
 class _VehicleScreenState extends State<VehicleScreen> {
+
+  _onChange(int i, CarouselPageChangedReason r) {
+    BlocProvider.of<VehicleBloc>(context).add(OnVehicleSlide(i));
+  }
 
   @override
   void initState() {
@@ -33,6 +38,8 @@ class _VehicleScreenState extends State<VehicleScreen> {
 
         return VehicleContainer(
           items: _list,
+          onChange: _onChange,
+          index: state.index,
         );
       }
     );

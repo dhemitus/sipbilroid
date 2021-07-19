@@ -5,9 +5,10 @@ import 'package:carousel_slider/carousel_slider.dart';
 
 class VehicleContainer extends StatelessWidget {
   final List<Widget>? items;
+  final int? index;
   final Function(int, CarouselPageChangedReason)? onChange;
 
-  VehicleContainer({this.onChange, this.items});
+  VehicleContainer({this.onChange, this.items, this.index});
 
   @override
   Widget build(BuildContext context) {
@@ -16,6 +17,7 @@ class VehicleContainer extends StatelessWidget {
         CarouselSlider(
           items: items,
           options:CarouselOptions(
+            initialPage: index!,
             height: 150.w,
             viewportFraction: 1.0,
             enlargeCenterPage: false,

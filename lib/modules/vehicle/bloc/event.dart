@@ -6,3 +6,11 @@ abstract class VehicleEvent extends Equatable {
 }
 
 class OnVehicleList extends VehicleEvent {}
+
+class OnVehicleSlide extends VehicleEvent {
+  final int index;
+  OnVehicleSlide(this.index);
+
+  @override
+  List<int> get props => [index];
+}

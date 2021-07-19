@@ -22,6 +22,10 @@ class VehicleBloc extends Bloc<VehicleEvent, VehicleState> {
     if(event is OnVehicleList) {
       yield* _loadVehicles();
     }
+
+    if(event is OnVehicleSlide) {
+      yield* _slideVehicle(event);
+    }
   }
 
   Stream<VehicleState> _loadVehicles() async* {
@@ -29,5 +33,9 @@ class VehicleBloc extends Bloc<VehicleEvent, VehicleState> {
 
     VehicleModel _vehicle = await _repo.loadVehcles();
     yield this.state.copyWith(vehicle: _vehicle, status: VehicleStatus.DONE);
+  }
+
+  Stream<VehicleState> _slideVehicle(OnVehicleSlide event) async* {
+    yield this.state.copyWith(index: event.index);
   }
 }
