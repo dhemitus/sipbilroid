@@ -6,6 +6,7 @@ import 'package:sipbilroid/modules/modules.dart';
 import 'package:sipbilroid/shareds/shareds.dart';
 
 class MonthlyScreen extends StatelessWidget {
+
   late String _month, _amount, _transaction;
 
   @override

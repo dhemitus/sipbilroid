@@ -5,7 +5,13 @@ abstract class ClaimEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class OnClaimList extends ClaimEvent {}
+class OnClaimList extends ClaimEvent {
+  final VehicleModel vehicle;
+  OnClaimList(this.vehicle);
+
+  @override
+  List<VehicleModel> get props => [vehicle];
+}
 
 class OnClaimPeriod extends ClaimEvent {
   final String period;

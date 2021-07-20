@@ -5,21 +5,28 @@ import 'package:sipbilroid/widgets/widgets.dart';
 import 'package:sipbilroid/modules/modules.dart';
 import 'package:sipbilroid/shareds/shareds.dart';
 
-class ResumeScreen extends StatelessWidget {
+class DashboardLoaderScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<VehicleBloc, VehicleState>(
       buildWhen: (previous, current) => previous != current,
       builder: (BuildContext context, VehicleState state) {
-        int _current = 0;
-
-        print('index ${state.index}');
 
         if(state.vehicle.list != null && state.vehicle.list!.isNotEmpty) {
-          _current = state.vehicle.list![state.index].sisaAnggaranBulanan!;
+           WidgetsBinding.instance!.addPostFrameCallback((_) {
+            print(state.index);
+            BlocProvider.of<DashboardBloc>(context).add(OnDashboardList(state.vehicle.list![state.index]));
+          });
+
+          return Column(
+            children: <Widget>[
+              MonthlyScreen(),
+              AnnualScreen(),
+            ],
+          );
         }
-        return ResumeText(title: 'SISA ANGGARAN BULANAN', money: Format.currency().format(_current),);
+        return Container();
       }
     );
 

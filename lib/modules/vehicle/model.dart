@@ -76,6 +76,10 @@ class VehicleModel extends Equatable {
     id: _json['id'] ?? null
   );
 
+  Map<String, dynamic> toParam() => {
+    'kendaraan_id': kendaraanId
+  };
+
   @override
   List<Object?> get props => [id,
     kendaraanId,

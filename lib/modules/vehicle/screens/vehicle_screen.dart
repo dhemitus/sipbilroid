@@ -6,15 +6,12 @@ import 'package:sipbilroid/modules/modules.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
 class VehicleScreen extends StatefulWidget {
+
   @override
   _VehicleScreenState createState() => _VehicleScreenState();
 }
 
 class _VehicleScreenState extends State<VehicleScreen> {
-
-  _onChange(int i, CarouselPageChangedReason r) {
-    BlocProvider.of<VehicleBloc>(context).add(OnVehicleSlide(i));
-  }
 
   @override
   void initState() {
@@ -22,12 +19,15 @@ class _VehicleScreenState extends State<VehicleScreen> {
     BlocProvider.of<VehicleBloc>(context).add(OnVehicleList());
   }
 
+  _onChange(int i, CarouselPageChangedReason r) {
+    BlocProvider.of<VehicleBloc>(context).add(OnVehicleSlide(i));
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<VehicleBloc, VehicleState>(
       buildWhen: (previous, current) => previous.vehicle != current.vehicle,
       builder: (BuildContext context, VehicleState state) {
-        print(state.vehicle.list);
         List<Widget> _list = [];
 
         if(state.vehicle.list != null && state.vehicle.list!.isNotEmpty) {
