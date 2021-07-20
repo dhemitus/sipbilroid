@@ -11,6 +11,7 @@ class Routes {
     ClaimRoutes.claimPath: (BuildContext context) => ClaimScreen(),
     ClaimRoutes.currentPath: (BuildContext context) => CurrentScreen(),
     ClaimRoutes.historyPath: (BuildContext context) => HistoryScreen(),
+    ClaimRoutes.detailPath: (BuildContext context) => DetailScreen(),
     HomeRoutes.path: (BuildContext context) => HomeScreen(),
   };
 }

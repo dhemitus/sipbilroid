@@ -4,6 +4,7 @@ import 'package:sipbilroid/modules/modules.dart';
 
 class ClaimRoutes {
   static const String claimPath = '/claim';
+  static const String detailPath = '/detail';
   static const String currentPath = '/current';
   static const String historyPath = '/history';
   static const Key claim = Key('__claimScreen__');

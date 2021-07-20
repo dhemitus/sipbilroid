@@ -21,10 +21,10 @@ class OnClaimPeriod extends ClaimEvent {
 }
 
 class OnClaimDetail extends ClaimEvent {
-  final String id;
-  OnClaimDetail(this.id);
+  final ClaimModel claim;
+  OnClaimDetail(this.claim);
   @override
-  List<String> get props => [id];
+  List<ClaimModel> get props => [claim];
 }
 
 class OnClaimPost extends ClaimEvent {

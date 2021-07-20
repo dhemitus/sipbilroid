@@ -4,3 +4,4 @@ export './history_screen.dart';
 export './currentlist_screen.dart';
 export './historylist_screen.dart';
 export './currentloader_screen.dart';
+export './detail_screen.dart';

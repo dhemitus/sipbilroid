@@ -22,7 +22,7 @@ class ClaimRepository {
         headers: _headers,
         body: data
       );
-      
+
         print(_response.body);
       if(_response.statusCode == 200) {
         print(data);
@@ -96,6 +96,39 @@ class ClaimRepository {
       } else {
         throw ClaimException(ClaimModel(message: 'failed'));
       }
+
+    } catch(e) {
+      throw ClaimException(ClaimModel(message: e.toString()));
+    }
+  }
+
+  Future<ClaimModel> loadDetail(ClaimModel detail) async {
+    try {
+      SharedPreferences _storage = await SharedPreferences.getInstance();
+      String _string = _storage.getString('authentication')!;
+
+      AuthenticationModel _auth = AuthenticationModel.fromString(_string);
+
+      Map<String, String> _headers = {
+        'Authorization': _auth.authorization
+      };
+
+      http.Response _response = await http.get(
+        Uri.http(ConfigNet.DOMAIN, '${ConfigNet.MAIN_PATH}${ConfigNet.VERSION}${ConfigNet.CLAIM_DETAIL_PATH}', detail.toDetail()),
+        headers: _headers
+      );
+
+      print(_response.body);
+      if(_response.statusCode == 200) {
+        Map _json = jsonDecode(_response.body);
+        ClaimModel _claim = ClaimModel.fromJson(_json['data']);
+
+        return _claim;
+      } else {
+        throw ClaimException(ClaimModel(message: 'failed'));
+      }
+
+
 
     } catch(e) {
       throw ClaimException(ClaimModel(message: e.toString()));

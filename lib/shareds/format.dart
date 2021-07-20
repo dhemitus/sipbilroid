@@ -10,6 +10,11 @@ class Format {
     return DateFormat('dd MMMM yyyy');
   }
 
+
+  static DateFormat dashDate() {
+    return DateFormat('yyyy-MM-dd');
+  }
+
   static DateTime todate(String s) {
     return DateTime.parse(s);
   }

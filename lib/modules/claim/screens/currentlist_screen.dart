@@ -12,10 +12,10 @@ class CurrentListScreen extends StatefulWidget {
 
 class _CurrentListScreenState extends State<CurrentListScreen> {
 
-  @override
-  void initState() {
-    super.initState();
 
+  void _onTap(ClaimModel c) {
+    print(c);
+    Navigator.of(context).pushNamed(ClaimRoutes.detailPath, arguments: c);
   }
 
   @override
@@ -26,7 +26,8 @@ class _CurrentListScreenState extends State<CurrentListScreen> {
         List<Widget> _list = [];
         if(state.claim.list != null && state.claim.list!.isNotEmpty) {
           state.claim.list!.map((ClaimModel e) {
-            _list.add(ClaimCard(
+            _list.add(ClaimButton(
+              onTap: () => _onTap(e),
               claim: Format.fullDate().format( e.tanggalKlaim!),
               amount: Format.currency().format(e.total),
               litre: e.jumlahLiter.toString(),

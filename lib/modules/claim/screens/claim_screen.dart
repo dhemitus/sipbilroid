@@ -46,7 +46,7 @@ class _ClaimScreenState extends State<ClaimScreen> {
 
   _onSubmit() {
     Map<String, dynamic> _post = {
-      'kendaraan_id': _vehicle,
+      'kendaraan_id': _vehicle.toString(),
       'tanggal_klaim': _date,
       'lokasi': _locationController.text,
       'jenis_bbm': _gasoline,

@@ -124,6 +124,10 @@ class ClaimModel extends Equatable {
     createdAt: _json['createdAt'] != null ? DateTime.parse(_json['createdAt']) : null
   );
 
+  Map<String, dynamic> toDetail() => {
+    'id': jsonEncode(id)
+  };
+
   Map<String, dynamic> toClaim() => {
     'kendaraan_id': kendaraanId!,
     'tanggal_klaim': DateFormat('yyyy-mm-dd').format(tanggalKlaim!),
