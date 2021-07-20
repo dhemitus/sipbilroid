@@ -33,7 +33,7 @@ class ClaimRepository {
     }
   }
 
-  Future<ClaimModel> loadList() async {
+  Future<ClaimModel> loadList(VehicleModel vehicle) async {
     try {
       SharedPreferences _storage = await SharedPreferences.getInstance();
       String _string = _storage.getString('authentication')!;
@@ -44,10 +44,17 @@ class ClaimRepository {
         'Authorization': _auth.authorization
       };
 
+      Map<String, dynamic> _params = {
+        'where': jsonEncode(vehicle.toParam())
+      };
+
+      print(vehicle.toParam());
+
       http.Response _response = await http.get(
-        Uri.http(ConfigNet.DOMAIN, '${ConfigNet.MAIN_PATH}${ConfigNet.VERSION}${ConfigNet.CLAIM_LIST_PATH}'),
+        Uri.http(ConfigNet.DOMAIN, '${ConfigNet.MAIN_PATH}${ConfigNet.VERSION}${ConfigNet.CLAIM_LIST_PATH}', _params),
         headers: _headers
       );
+
       if(_response.statusCode == 200) {
         Map _json = jsonDecode(_response.body);
         ClaimModel _claim = ClaimModel.fromJsonList(_json['data']);

@@ -22,7 +22,7 @@ class ClaimBloc extends Bloc<ClaimEvent, ClaimState> {
   @override
   Stream<ClaimState> mapEventToState(ClaimEvent event) async* {
     if(event is OnClaimList) {
-      yield* _loadList();
+      yield* _loadList(event);
     }
 
     if(event is OnClaimPeriod) {
@@ -42,10 +42,10 @@ class ClaimBloc extends Bloc<ClaimEvent, ClaimState> {
     yield this.state.copyWith(claim:_claim, status: ClaimStatus.DONE);
   }
 
-  Stream<ClaimState> _loadList() async* {
+  Stream<ClaimState> _loadList(OnClaimList event) async* {
     yield this.state.copyWith(status: ClaimStatus.LOADING);
 
-    ClaimModel _claim = await _repo.loadList();
+    ClaimModel _claim = await _repo.loadList(event.vehicle);
 
     yield this.state.copyWith(claim: _claim, status: ClaimStatus.DONE);
   }

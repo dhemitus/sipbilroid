@@ -15,7 +15,7 @@ class _CurrentListScreenState extends State<CurrentListScreen> {
   @override
   void initState() {
     super.initState();
-    BlocProvider.of<ClaimBloc>(context).add(OnClaimList());
+
   }
 
   @override

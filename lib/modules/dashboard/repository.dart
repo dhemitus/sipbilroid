@@ -6,7 +6,7 @@ import 'package:sipbilroid/shareds/shareds.dart';
 
 class DashboardRepository {
 
-  Future<DashboardModel> loadDashboard() async {
+  Future<DashboardModel> loadDashboard(VehicleModel vehicle) async {
     try {
       SharedPreferences _storage = await SharedPreferences.getInstance();
       String _string = _storage.getString('authentication')!;
@@ -17,13 +17,21 @@ class DashboardRepository {
         'Authorization': _auth.authorization
       };
 
+      Map<String, dynamic> _params = {
+        'where': jsonEncode(vehicle.toParam())
+      };
+
       http.Response _response = await http.get(
-        Uri.http(ConfigNet.DOMAIN, '${ConfigNet.MAIN_PATH}${ConfigNet.VERSION}${ConfigNet.DASHBOARD_PATH}'),
+        Uri.http(ConfigNet.DOMAIN, '${ConfigNet.MAIN_PATH}${ConfigNet.VERSION}${ConfigNet.DASHBOARD_PATH}', _params),
         headers: _headers
       );
 
+      print(vehicle.toParam());
+
       if(_response.statusCode == 200) {
         Map _json = jsonDecode(_response.body);
+
+        print(_json);
 
         return DashboardModel(
           message: 'success',

@@ -5,4 +5,11 @@ abstract class DashboardEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class OnDashboardList extends DashboardEvent {}
+class OnDashboardList extends DashboardEvent {
+  final VehicleModel vehicle;
+
+  OnDashboardList(this.vehicle);
+
+  @override
+  List<VehicleModel> get props => [vehicle];
+}
