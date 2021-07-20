@@ -4,6 +4,7 @@ import 'dart:io';
 import 'dart:convert';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
+import 'package:intl/intl.dart';
 import 'package:sipbilroid/widgets/widgets.dart';
 import 'package:sipbilroid/modules/modules.dart';
 import 'package:sipbilroid/shareds/shareds.dart';
@@ -33,7 +34,7 @@ class _ClaimScreenState extends State<ClaimScreen> {
   }
 
   void _onTime(DateTime d) {
-    _date = Format.fullDate().format(d);
+    _date = DateFormat('yyyy-MM-dd').format(d);
 
   }
 
