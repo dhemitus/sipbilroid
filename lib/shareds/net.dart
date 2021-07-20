@@ -9,6 +9,7 @@ class ConfigNet {
   static const String VEHICLE_PATH = '/list-kendaraan';
   static const String GASOLINE_PATH = '/jenis-bbm';
   static const String CLAIM_REQUEST_PATH = '/request-claim';
+  static const String CLAIM_UPDATE_PATH = '/update-claim';
   static const String CLAIM_LIST_PATH = '/list-claim';
   static const String CLAIM_DETAIL_PATH = '/detail-claim';
 }

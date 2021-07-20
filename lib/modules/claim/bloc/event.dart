@@ -35,3 +35,12 @@ class OnClaimPost extends ClaimEvent {
   @override
   List<Map<String, dynamic>> get props => [claim];
 }
+
+class OnClaimUpdate extends ClaimEvent {
+  final Map<String, dynamic> claim;
+
+  OnClaimUpdate(this.claim);
+
+  @override
+  List<Map<String, dynamic>> get props => [claim];
+}

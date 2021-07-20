@@ -15,7 +15,8 @@ class Blocs {
         GasolineRoutes.bloc,
         HomeRoutes.bloc,
         ClaimRoutes.bloc,
-        ClientRoutes.bloc
+        ClientRoutes.bloc,
+        MapRoutes.bloc
       ], 
       child: child
     );

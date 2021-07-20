@@ -7,13 +7,15 @@ import 'package:sipbilroid/shareds/shareds.dart';
 class BaseDateTime extends StatelessWidget {
   final DateFormat? format;
   final Function? onChange;
+  final DateTime? value;
 
-  BaseDateTime({this.format, this.onChange});
+  BaseDateTime({this.format, this.onChange, this.value});
 
   @override
   Widget build(BuildContext context) {
     return DateTimeField(
       resetIcon: null,
+      initialValue: value ?? DateTime.now(),
       format: format ?? DateFormat("yyyy-MM-dd"),
       onShowPicker: (context, currentValue) {
         return showDatePicker(

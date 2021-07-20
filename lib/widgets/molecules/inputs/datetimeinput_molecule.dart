@@ -6,8 +6,9 @@ import 'package:sipbilroid/widgets/widgets.dart';
 class DateTimeInput extends StatelessWidget {
   final String? title;
   final Function? onChange;
+  final DateTime? value;
 
-  DateTimeInput({this.title, this.onChange});
+  DateTimeInput({this.title, this.onChange, this.value});
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +16,7 @@ class DateTimeInput extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Regular9Text(title ?? ''),
-        BaseDateTime(onChange:onChange,)
+        BaseDateTime(onChange:onChange, value: value)
       ],
     );
 

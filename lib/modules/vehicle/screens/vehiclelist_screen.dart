@@ -7,8 +7,9 @@ import 'package:carousel_slider/carousel_slider.dart';
 
 class VehicleListScreen extends StatefulWidget {
   final Function? onChange;
+  final String? plate;
 
-  VehicleListScreen({this.onChange});
+  VehicleListScreen({this.onChange, this.plate});
 
   @override
   _VehicleListScreenState createState() => _VehicleListScreenState();
@@ -31,17 +32,21 @@ class _VehicleListScreenState extends State<VehicleListScreen> {
     return BlocBuilder<VehicleBloc, VehicleState>(
       buildWhen: (previous, current) => previous.vehicle != current.vehicle,
       builder: (BuildContext context, VehicleState state) {
-        print(state.vehicle.list);
+  
         List<Map<String, dynamic>> _list = [{'id':0, 'plate': 'Pilih kendaraan'}];
-
+        Map<String, dynamic> _value = {};
         if(state.vehicle.list != null && state.vehicle.list!.isNotEmpty) {
           state.vehicle.list!.map((VehicleModel e) { 
             _list.add({'id': e.kendaraanId, 'plate': e.nomorPolisi});
           }).toList();
 
-          print(_list);
+          if(widget.plate != null) {
+            _value = _list.singleWhere((Map<String, dynamic> e) => e['plate'] == widget.plate!);
+          } else {
+            _value = _list[0];
+          }
         }
-        return MapDropMenuButton(value: _list[0], items: _list, onChange: widget.onChange,);
+        return MapDropMenuButton(value: _value, items: _list, onChange: widget.onChange,);
       }
     );
   }
