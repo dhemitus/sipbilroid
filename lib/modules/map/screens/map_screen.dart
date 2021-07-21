@@ -6,6 +6,7 @@ import 'package:sipbilroid/widgets/widgets.dart';
 import 'package:sipbilroid/modules/modules.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
+//import 'package:geocoding/geocoding.dart';
 
 class MapScreen extends StatefulWidget {
 
@@ -16,48 +17,83 @@ class MapScreen extends StatefulWidget {
 
 class _MapScreenState extends State<MapScreen> {
   final Location _location = Location();
+  late LocationData _current;
+
   Map<MarkerId, Marker> _markers = <MarkerId, Marker>{};
   MarkerId _id = MarkerId('POM_BBM');
   late GoogleMapController _controller;
-  late LatLng _latLng;
-
-  static final CameraPosition _kGooglePlex = CameraPosition(
-    target: LatLng(-6.1751, 106.865),
-    zoom: 14.4746,
-  );
+  LatLng _initial = LatLng(-6.1751, 106.865);
+  
 
   @override
   void initState() {
     super.initState();
-    _location.onLocationChanged.listen((event) async {
+    _getLocation();
+    _setMarker(_initial);
+    BlocProvider.of<MapBloc>(context).add(SetMap(MapModel(latLng: _initial)));
+  }
 
-      _markers[_id] = Marker(
-        markerId: _id,
-        position: LatLng(event.latitude!, event.longitude!),
-        icon: BitmapDescriptor.defaultMarker,
-        draggable: false,
-        onTap: () {
-          print('aaa');
-        },
-        onDragEnd: (position) {
 
-        }
-      );
+  _getLocation() async {
+    try {
+    late bool _enable;
+    PermissionStatus _status;
+    _enable = await _location.serviceEnabled();
+
+    if(!_enable) {
+      _enable = await _location.requestService();
+      if(!_enable) {
+        return;
+      }
+    }
+
+    _status = await _location.hasPermission();
+    if(_status == PermissionStatus.denied) {
+      _status = await _location.requestPermission();
+      if(_status != PermissionStatus.granted) {
+        return;
+      }
+    }
+
+    _current = await _location.getLocation();
+    _initial = LatLng(_current.latitude!, _current.longitude!);
+    _setMarker(_initial);
+    _location.onLocationChanged.listen((LocationData data) {
       setState(() {
-        _latLng = LatLng(event.latitude!, event.longitude!);
+        _current = data;
+        _initial = LatLng(_current.latitude!, _current.longitude!);
+        _setMarker(_initial);
       });
-
     });
+
+    } catch(e) {
+      print(e.toString());
+    }
+  }
+
+  _setMarker(LatLng l) {
+    _markers[_id] = Marker(
+      markerId: _id,
+      position: l,
+      icon: BitmapDescriptor.defaultMarker,
+      draggable: true,
+      onTap: () {
+        print('aaa');
+      },
+      onDragEnd: (position) async {
+        BlocProvider.of<MapBloc>(context).add(SetMap(MapModel(latLng: position)));
+      }
+    );
   }
 
   void _onMap(GoogleMapController c) {
-    setState(() {
-      _controller = c;
+    _controller = c;
+    _location.onLocationChanged.listen((event) async {
+      _controller.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(
+        target: LatLng(event.latitude!, event.longitude!),
+        zoom: 15
+      )));
     });
-    _controller.animateCamera(CameraUpdate.newCameraPosition(
-      CameraPosition(target: _latLng, zoom: 15)
-    ));
-
   }
 
 
@@ -68,30 +104,10 @@ class _MapScreenState extends State<MapScreen> {
         children: <Widget>[
           GoogleMap(
             mapType: MapType.normal,
-            initialCameraPosition: _kGooglePlex,
+            initialCameraPosition: CameraPosition(target: _initial, zoom: 15),
             onMapCreated: _onMap,
-            //myLocationEnabled: true,
+            myLocationEnabled: true,
             markers: Set<Marker>.of(_markers.values),
-            onCameraIdle: (){
-              Marker _mark = _markers[_id]!;
-              Marker _marker = _mark.copyWith(
-                positionParam: _latLng
-              );
-              setState(() {
-                _markers[_id] = _marker;
-              });
-            },
-            onCameraMove: (position){
-              Marker _mark = _markers[_id]!;
-              Marker _marker = _mark.copyWith(
-                positionParam: position.target
-              );
-              setState(() {
-                _latLng = position.target;
-                _markers[_id] = _marker;
-                BlocProvider.of<MapBloc>(context).add(SetMap(MapModel(latLng: _latLng)));
-              });
-            }
           )
         ],
       ),

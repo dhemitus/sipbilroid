@@ -7,13 +7,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class ClaimForm extends StatelessWidget {
   final TextEditingController? litreController, totalController, locationController;
   final Function? onSubmit, onLoad, onTime, onLocation;
-  final Widget? gasoline, vehicle;
+  final Widget? gasoline, vehicle, map;
   final File? receipt;
   final bool? edit;
   final String? url;
   final DateTime? date;
 
-  ClaimForm({this.totalController, this.litreController, this.locationController, this.onLocation, this.onTime, this.onSubmit, this.onLoad, this.gasoline, this.vehicle, this.receipt, this.edit = false, this.url, this.date});
+  ClaimForm({this.totalController, this.litreController, this.locationController, this.onLocation, this.onTime, this.onSubmit, this.onLoad, this.gasoline, this.vehicle, this.map, this.receipt, this.edit = false, this.url, this.date});
 
   @override
   Widget build(BuildContext context) {
@@ -24,8 +24,8 @@ class ClaimForm extends StatelessWidget {
           vehicle ?? Container(),
           DateTimeInput(onChange: onTime, value: date),
           SizedBox(height: 10.0.w),
-          //FieldButton(label: 'Lokasi', onTap: onLocation),
-          InputText(hint: 'Lokasi', controller: locationController),
+          map ?? Container(),
+  //        InputText(hint: 'Lokasi', controller: locationController),
           gasoline ?? Container(),
           InputText(hint: 'Jumlah Liter', controller: litreController, inputType: TextInputType.number),
           InputText(hint: 'Total Rupiah', controller: totalController, inputType: TextInputType.number),

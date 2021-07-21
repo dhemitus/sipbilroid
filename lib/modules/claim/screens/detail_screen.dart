@@ -72,15 +72,14 @@ class _DetailScreenState extends State<DetailScreen>{
     _locationController.text = _claim.lokasi!;
     _litreController.text  = _claim.jumlahLiter!.toString();
     _totalController.text = _claim.total!.toString();
-
     return ClaimTemplate(
       children: [
         HeaderScreen(title: 'DETAIL TRANSAKSI',),
         BoardContainer(),
-        OnMapScreen(),
         BottomCard(
           child: ClaimForm(
-            onLocation: _onLocation,
+            map:OnMapScreen(onLocation: _onLocation),
+              //onLocation: _onLocation,
             date: _claim.tanggalKlaim,
             locationController: _locationController,
             litreController: _litreController,
@@ -97,5 +96,7 @@ class _DetailScreenState extends State<DetailScreen>{
         )
       ],
     );
+
+
   }
 }

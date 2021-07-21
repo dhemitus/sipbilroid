@@ -40,6 +40,7 @@ class _ClaimScreenState extends State<ClaimScreen> {
   void _onCar(Map<String, dynamic> d) {
     _vehicle = d['id'];
   }
+
   void _onGas(String s) {
     _gasoline = s;
   }
@@ -57,6 +58,10 @@ class _ClaimScreenState extends State<ClaimScreen> {
     BlocProvider.of<ClaimBloc>(context).add(OnClaimPost(_post));
   }
 
+  void _onLocation() {
+    Navigator.of(context).pushNamed(MapRoutes.path);
+  }
+
   @override
   Widget build(BuildContext context) {
     return ClaimTemplate(
@@ -65,6 +70,7 @@ class _ClaimScreenState extends State<ClaimScreen> {
         BoardContainer(),
         BottomCard(
           child: ClaimForm(
+            map:OnMapScreen(onLocation: _onLocation),
             locationController: _locationController,
             litreController: _litreController,
             totalController: _totalController,

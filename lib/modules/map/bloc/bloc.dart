@@ -19,10 +19,12 @@ class MapBloc extends Bloc<MapEvent, MapState> {
 
   @override
   Stream<MapState> mapEventToState(MapEvent event) async* {
-
+    if(event is SetMap) {
+      yield* _setMap(event);
+    }
   }
 
-  Stream<MapState> _setInit(SetMap event) async* {
+  Stream<MapState> _setMap(SetMap event) async* {
     yield this.state.copyWith(status: MapStatus.LOADING);
 
     MapModel _map = await _repo.setLocation(event.map);

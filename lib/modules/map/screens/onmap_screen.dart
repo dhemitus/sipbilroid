@@ -3,9 +3,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sipbilroid/widgets/widgets.dart';
 import 'package:sipbilroid/modules/modules.dart';
-import 'package:sipbilroid/shareds/shareds.dart';
 
 class OnMapScreen extends StatelessWidget {
+  final Function? onLocation;
+  
+  OnMapScreen({this.onLocation});
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +15,7 @@ class OnMapScreen extends StatelessWidget {
       buildWhen: (previous, current) => previous.map.latLng != current.map.latLng,
       builder: (BuildContext context, MapState state) {
         print(state.map.latLng);
-        return Container();
+        return FieldButton(label: state.map.location ?? 'Lokasi', onTap: onLocation);
       }
     );
 
