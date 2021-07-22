@@ -21,7 +21,7 @@ class _CurrentListScreenState extends State<CurrentListScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ClaimBloc, ClaimState>(
-      buildWhen: (previous, current) => previous.claim != current.claim,
+      buildWhen: (previous, current) => previous.claim != current.claim && current.claim.message != 'update success',
       builder:(BuildContext context, ClaimState state) {
         List<Widget> _list = [];
         if(state.claim.list != null && state.claim.list!.isNotEmpty) {

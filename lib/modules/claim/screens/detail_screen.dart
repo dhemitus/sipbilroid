@@ -68,6 +68,12 @@ class _DetailScreenState extends State<DetailScreen>{
 
   }
 
+  void _onSuccess() {
+    showDialog(context: context, builder: (BuildContext context){
+      return WarnDialog(warn:'update klaim berhasil');
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     ClaimModel _claim = ModalRoute.of(context)!.settings.arguments as ClaimModel;
@@ -75,30 +81,38 @@ class _DetailScreenState extends State<DetailScreen>{
     _locationController.text = _claim.lokasi!;
     _litreController.text  = _claim.jumlahLiter!.toString();
     _totalController.text = _claim.total!.toString();
-    return ClaimTemplate(
-      children: [
-        HeaderScreen(title: 'DETAIL TRANSAKSI',),
-        BoardContainer(),
-        BottomCard(
-          child: ClaimForm(
-            map:OnMapScreen(onLocation: _onLocation, onResult: _onPosition),
-            date: _claim.tanggalKlaim,
-            locationController: _locationController,
-            litreController: _litreController,
-            totalController: _totalController,
-            vehicle: VehicleListScreen(plate: _claim.nomorPolisi),
-            gasoline:GasolineScreen(onChange: _onGas, value: _claim.jenisBbm),
-            onTime: _onTime,
-            onLoad: _onLoad,
-            onSubmit: _onSubmit,
-            receipt: _file,
-            edit: true,
-            url: 'http://151.106.113.7/bbm-claim-api${_claim.struk}',
-          ),
-        )
-      ],
+    return BlocBuilder<ClaimBloc, ClaimState>(
+      buildWhen: (previous, current) => previous.claim != current.claim,
+      builder: (BuildContext context, ClaimState state) {
+        if(state.claim.message == 'update success') {
+          WidgetsBinding.instance!.addPostFrameCallback((_) { 
+            _onSuccess();
+          });
+        }
+        return ClaimTemplate(
+          children: [
+            HeaderScreen(title: 'DETAIL TRANSAKSI'),
+            BoardContainer(),
+            BottomCard(
+              child: ClaimForm(
+                map:OnMapScreen(onLocation: _onLocation, onResult: _onPosition),
+                date: _claim.tanggalKlaim,
+                locationController: _locationController,
+                litreController: _litreController,
+                totalController: _totalController,
+                vehicle: VehicleListScreen(plate: _claim.nomorPolisi),
+                gasoline:GasolineScreen(onChange: _onGas, value: _claim.jenisBbm),
+                onTime: _onTime,
+                onLoad: _onLoad,
+                onSubmit: _onSubmit,
+                receipt: _file,
+                edit: true,
+                url: 'http://151.106.113.7/bbm-claim-api${_claim.struk}',
+              ),
+            )
+          ],
+        );
+      }
     );
-
-
   }
 }

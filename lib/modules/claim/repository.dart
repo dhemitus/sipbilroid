@@ -29,7 +29,8 @@ class ClaimRepository {
       if(_response.statusCode == 200) {
         print(data);
       }
-      return ClaimModel();
+
+      return ClaimModel(message: 'input success');
     } catch(e) {
       throw ClaimException(ClaimModel(message: e.toString()));
     }
@@ -47,8 +48,6 @@ class ClaimRepository {
         'Authorization': _auth.authorization
       };
 
-      print(data);
-
       http.Response _response = await http.patch(
         Uri.http(ConfigNet.DOMAIN, '${ConfigNet.MAIN_PATH}${ConfigNet.VERSION}${ConfigNet.CLAIM_UPDATE_PATH}'),
         headers: _headers,
@@ -59,7 +58,7 @@ class ClaimRepository {
       if(_response.statusCode == 200) {
         print(data);
       }
-      return ClaimModel();
+      return ClaimModel(message: 'update success');
     } catch(e) {
       throw ClaimException(ClaimModel(message: e.toString()));
     }

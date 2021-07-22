@@ -68,28 +68,44 @@ class _ClaimScreenState extends State<ClaimScreen> {
     _location = s;
   }
 
+  void _onSuccess() {
+    showDialog(context: context, builder: (BuildContext context){
+      return WarnDialog(warn:'input klaim berhasil');
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    return ClaimTemplate(
-      children: [
-        HeaderScreen(title: 'INPUT TRANSAKSI BARU',),
-        BoardContainer(),
-        BottomCard(
-          child: ClaimForm(
-            map:OnMapScreen(onLocation: _onLocation, onResult: _onPosition),
-            locationController: _locationController,
-            litreController: _litreController,
-            totalController: _totalController,
-            vehicle: VehicleListScreen(onChange: _onCar,),
-            gasoline:GasolineScreen(onChange: _onGas),
-            onTime: _onTime,
-            onLoad: _onLoad,
-            onSubmit: _onSubmit,
-            receipt: _file,
-            edit:false,
-          ),
-        )
-      ],
+    return BlocBuilder<ClaimBloc, ClaimState>(
+      buildWhen: (previous, current) => previous.claim != current.claim,
+      builder: (BuildContext context, ClaimState state) {
+        if(state.claim.message == 'input success') {
+          WidgetsBinding.instance!.addPostFrameCallback((_) { 
+            _onSuccess();
+          });
+        }
+        return ClaimTemplate(
+          children: [
+            HeaderScreen(title: 'INPUT TRANSAKSI BARU',),
+            BoardContainer(),
+            BottomCard(
+              child: ClaimForm(
+                map:OnMapScreen(onLocation: _onLocation, onResult: _onPosition),
+                locationController: _locationController,
+                litreController: _litreController,
+                totalController: _totalController,
+                vehicle: VehicleListScreen(onChange: _onCar,),
+                gasoline:GasolineScreen(onChange: _onGas),
+                onTime: _onTime,
+                onLoad: _onLoad,
+                onSubmit: _onSubmit,
+                receipt: _file,
+                edit:false,
+              ),
+            )
+          ],
+        );
+      }
     );
   }
 
