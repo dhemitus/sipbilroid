@@ -22,13 +22,14 @@ class _ClaimScreenState extends State<ClaimScreen> {
   TextEditingController _locationController = TextEditingController();
 
   File? _file;
-  String? _date, _gasoline, _base;
+  String? _date, _gasoline, _base, _location;
   int? _vehicle;
 
   void _onLoad() async {
     _file = await ImageUtils.load();
     final _res = await FlutterImageCompress.compressWithFile(_file!.absolute.path, minWidth: 1500, minHeight: 1500, quality: 80);
     _base = base64Encode(_res!);
+    print(_base);
     setState(() {});
   }
 
@@ -45,21 +46,26 @@ class _ClaimScreenState extends State<ClaimScreen> {
     _gasoline = s;
   }
 
-  _onSubmit() {
+  void _onSubmit() {
     Map<String, dynamic> _post = {
       'kendaraan_id': _vehicle.toString(),
-      'tanggal_klaim': _date,
-      'lokasi': _locationController.text,
+      'tanggal_klaim': _date ?? DateFormat('yyyy-MM-dd').format(DateTime.now()),
+      'lokasi': _location,
       'jenis_bbm': _gasoline,
       'jumlah_liter': _litreController.text,
       'total': _totalController.text,
       'receipt': _base
     };
+    //print(_post);
     BlocProvider.of<ClaimBloc>(context).add(OnClaimPost(_post));
   }
 
   void _onLocation() {
     Navigator.of(context).pushNamed(MapRoutes.path);
+  }
+
+  void _onPosition(String s) {
+    _location = s;
   }
 
   @override
@@ -70,7 +76,7 @@ class _ClaimScreenState extends State<ClaimScreen> {
         BoardContainer(),
         BottomCard(
           child: ClaimForm(
-            map:OnMapScreen(onLocation: _onLocation),
+            map:OnMapScreen(onLocation: _onLocation, onResult: _onPosition),
             locationController: _locationController,
             litreController: _litreController,
             totalController: _totalController,

@@ -22,8 +22,7 @@ class _DetailScreenState extends State<DetailScreen>{
   TextEditingController _locationController = TextEditingController();
 
   File? _file;
-  String? _date, _gasoline, _base;
-  int? _vehicle;
+  String? _date, _gasoline, _base, _location;
 
   void _onLoad() async {
     _file = await ImageUtils.load();
@@ -45,9 +44,9 @@ class _DetailScreenState extends State<DetailScreen>{
     ClaimModel _claim = ModalRoute.of(context)!.settings.arguments as ClaimModel;
     Map<String, dynamic> _post = {
       'id': _claim.id.toString(),
-      'tanggal_klaim': _date,
-      'lokasi': _locationController.text,
-      'jenis_bbm': _gasoline,
+      'tanggal_klaim': _date ?? DateFormat('yyyy-MM-dd').format(_claim.tanggalKlaim!),
+      'lokasi': _location ?? _claim.lokasi,
+      'jenis_bbm': _gasoline ?? _claim.jenisBbm,
       'jumlah_liter': _litreController.text,
       'total': _totalController.text,
       'receipt': _base
@@ -57,6 +56,10 @@ class _DetailScreenState extends State<DetailScreen>{
 
   void _onLocation() {
     Navigator.of(context).pushNamed(MapRoutes.path);
+  }
+
+  void _onPosition(String s) {
+    _location = s;
   }
 
   @override
@@ -78,8 +81,7 @@ class _DetailScreenState extends State<DetailScreen>{
         BoardContainer(),
         BottomCard(
           child: ClaimForm(
-            map:OnMapScreen(onLocation: _onLocation),
-              //onLocation: _onLocation,
+            map:OnMapScreen(onLocation: _onLocation, onResult: _onPosition),
             date: _claim.tanggalKlaim,
             locationController: _locationController,
             litreController: _litreController,

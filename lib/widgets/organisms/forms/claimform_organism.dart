@@ -32,7 +32,7 @@ class ClaimForm extends StatelessWidget {
           SizedBox(height: 10.0.w),
           ImageButton(label: 'upload receipt', onTap: onLoad, file: receipt, url: url, edit: edit),
           SizedBox(height: 82.0.w,),
-          PrimaryButton(label: 'Login', onTap: onSubmit),
+          PrimaryButton(label: 'Submit', onTap: onSubmit),
           SizedBox(height: 82.0.w,)
         ],
       )

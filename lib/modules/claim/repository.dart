@@ -17,6 +17,8 @@ class ClaimRepository {
         'Content-Type': 'application/x-www-form-urlencoded',
         'Authorization': _auth.authorization
       };
+
+      print(data);
       http.Response _response = await http.post(
         Uri.http(ConfigNet.DOMAIN, '${ConfigNet.MAIN_PATH}${ConfigNet.VERSION}${ConfigNet.CLAIM_REQUEST_PATH}'),
         headers: _headers,
@@ -44,6 +46,9 @@ class ClaimRepository {
         'Content-Type': 'application/x-www-form-urlencoded',
         'Authorization': _auth.authorization
       };
+
+      print(data);
+
       http.Response _response = await http.patch(
         Uri.http(ConfigNet.DOMAIN, '${ConfigNet.MAIN_PATH}${ConfigNet.VERSION}${ConfigNet.CLAIM_UPDATE_PATH}'),
         headers: _headers,

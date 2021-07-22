@@ -6,8 +6,9 @@ import 'package:sipbilroid/modules/modules.dart';
 
 class OnMapScreen extends StatelessWidget {
   final Function? onLocation;
-  
-  OnMapScreen({this.onLocation});
+  final Function(String)? onResult;
+
+  OnMapScreen({this.onLocation, this.onResult});
 
   @override
   Widget build(BuildContext context) {
@@ -15,6 +16,9 @@ class OnMapScreen extends StatelessWidget {
       buildWhen: (previous, current) => previous.map.latLng != current.map.latLng,
       builder: (BuildContext context, MapState state) {
         print(state.map.latLng);
+        WidgetsBinding.instance!.addPostFrameCallback((_) { 
+          onResult!(state.map.location!);
+        });
         return FieldButton(label: state.map.location ?? 'Lokasi', onTap: onLocation);
       }
     );
