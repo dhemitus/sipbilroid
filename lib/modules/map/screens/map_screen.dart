@@ -23,7 +23,6 @@ class _MapScreenState extends State<MapScreen> {
   MarkerId _id = MarkerId('POM_BBM');
   late GoogleMapController _controller;
   LatLng _initial = LatLng(-6.1751, 106.865);
-  
 
   @override
   void initState() {
@@ -62,6 +61,7 @@ class _MapScreenState extends State<MapScreen> {
       setState(() {
         _current = data;
         _initial = LatLng(_current.latitude!, _current.longitude!);
+        BlocProvider.of<MapBloc>(context).add(SetMap(MapModel(latLng: _initial)));
         _setMarker(_initial);
       });
     });
@@ -99,18 +99,15 @@ class _MapScreenState extends State<MapScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Stack(
-        children: <Widget>[
-          GoogleMap(
-            mapType: MapType.normal,
-            initialCameraPosition: CameraPosition(target: _initial, zoom: 15),
-            onMapCreated: _onMap,
-            myLocationEnabled: true,
-            markers: Set<Marker>.of(_markers.values),
-          )
-        ],
+    return MapTemplate(
+      map: GoogleMap(
+        mapType: MapType.normal,
+        initialCameraPosition: CameraPosition(target: _initial, zoom: 15),
+        onMapCreated: _onMap,
+        myLocationEnabled: true,
+        markers: Set<Marker>.of(_markers.values),
       ),
+      onConfirm: () => Navigator.of(context).pop(),
     );
   }
 }

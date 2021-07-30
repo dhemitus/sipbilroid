@@ -12,7 +12,8 @@ enum ClaimStatus {
 class ClaimModel extends Equatable {
   final DateTime? createdAt, updatedAt, tanggalKlaim;
   final int? id, satkerId, penggunakendaraan, penggunaId, kendaraanId;
-  final int? jumlahLiter, total;
+  final int? total;
+  final double? jumlahLiter;
   final String? createdBy, updatedBy, noKlaim, pengguna, nomorPolisi, status, lokasi, jenisBbm, struk, receipt, catatan, message;
   final List<ClaimModel>? list;
 
@@ -56,7 +57,7 @@ class ClaimModel extends Equatable {
     String? updatedBy,
     String? createdBy,
     int? total,
-    int? jumlahLiter,
+    double? jumlahLiter,
     int? kendaraanId,
     int? penggunaId,
     int? penggunakendaraan,
@@ -113,7 +114,7 @@ class ClaimModel extends Equatable {
     updatedBy: _json['updatedBy'] ?? null,
     createdBy: _json['createdBy'] ?? null,
     total: _json['total'] ?? null,
-    jumlahLiter: _json['jumlah_liter'] ?? null,
+    jumlahLiter: _json['jumlah_liter'].toDouble() ?? null,
     kendaraanId: _json['kendaraan_id'] ?? null,
     penggunaId: _json['pengguna_id'] ?? null,
     penggunakendaraan: _json['penggunakendaraan'] ?? null,

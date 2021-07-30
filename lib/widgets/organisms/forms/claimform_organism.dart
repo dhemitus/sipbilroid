@@ -21,15 +21,13 @@ class ClaimForm extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: 30.0.w),
       child: Column(
         children: <Widget>[
+          SizedBox(height: 14.0.w,),
           vehicle ?? Container(),
-          DateTimeInput(onChange: onTime, value: date),
-          SizedBox(height: 10.0.w),
+          DateTimeInput(onChange: onTime, value: date, title: 'Tanggal',),
           map ?? Container(),
-  //        InputText(hint: 'Lokasi', controller: locationController),
           gasoline ?? Container(),
-          InputText(hint: 'Jumlah Liter', controller: litreController, inputType: TextInputType.number),
+          InputText(hint: 'Jumlah Liter', controller: litreController, inputType: TextInputType.number, title: 'Jumlah Liter',),
           InputText(hint: 'Total Rupiah', controller: totalController, inputType: TextInputType.number),
-          SizedBox(height: 10.0.w),
           ImageButton(label: 'upload receipt', onTap: onLoad, file: receipt, url: url, edit: edit),
           SizedBox(height: 82.0.w,),
           PrimaryButton(label: 'Submit', onTap: onSubmit),

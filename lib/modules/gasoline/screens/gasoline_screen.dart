@@ -28,13 +28,15 @@ class _GasolineScreenState extends State<GasolineScreen> {
     return BlocBuilder<GasolineBloc, GasolineState>(
       buildWhen: (previous, current) => previous.gasoline.list != current.gasoline.list,
       builder: (BuildContext context, GasolineState state) {
-        print(state.gasoline.list);
+
         if(state.gasoline.list != null && state.gasoline.list!.isNotEmpty) {
           _gasoline = ['Pilih BBM'];
-          state.gasoline.list!.map((GasolineModel e) => _gasoline.add(e.deskripsi!) ).toList();
+          state.gasoline.list!.map((GasolineModel e) {
+            _gasoline.add(e.deskripsi!);
+          }).toList();
         }
         if(state.status == GasolineStatus.DONE) {
-          return DropMenuButton(value: widget.value ?? _gasoline[0], items: _gasoline, onChange: widget.onChange,);
+          return DropMenuButton(value: widget.value ?? _gasoline[0], items: _gasoline, onChange: widget.onChange, title: 'Jenis BBM',);
         } else {
           return Container();
         }

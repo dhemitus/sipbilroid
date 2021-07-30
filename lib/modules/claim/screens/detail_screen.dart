@@ -32,8 +32,7 @@ class _DetailScreenState extends State<DetailScreen>{
   }
 
   void _onTime(DateTime d) {
-    _date = DateFormat('yyyy-MM-dd').format(d);
-
+    _date = Format.dashDate().format(d);
   }
 
   void _onGas(String s) {
@@ -44,7 +43,7 @@ class _DetailScreenState extends State<DetailScreen>{
     ClaimModel _claim = ModalRoute.of(context)!.settings.arguments as ClaimModel;
     Map<String, dynamic> _post = {
       'id': _claim.id.toString(),
-      'tanggal_klaim': _date ?? DateFormat('yyyy-MM-dd').format(_claim.tanggalKlaim!),
+      'tanggal_klaim': _date ?? Format.dashDate().format(_claim.tanggalKlaim!),
       'lokasi': _location ?? _claim.lokasi,
       'jenis_bbm': _gasoline ?? _claim.jenisBbm,
       'jumlah_liter': _litreController.text,
@@ -95,7 +94,7 @@ class _DetailScreenState extends State<DetailScreen>{
             BoardContainer(),
             BottomCard(
               child: ClaimForm(
-                map:OnMapScreen(onLocation: _onLocation, onResult: _onPosition),
+                map: OnMapScreen(onLocation: _onLocation, onResult: _onPosition, location: _claim.lokasi),
                 date: _claim.tanggalKlaim,
                 locationController: _locationController,
                 litreController: _litreController,

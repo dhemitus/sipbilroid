@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sipbilroid/shareds/shareds.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class BaseInput extends StatelessWidget {
   final Function? listener;
@@ -16,6 +15,7 @@ class BaseInput extends StatelessWidget {
   final TextInputAction? inputAction;
   final InputBorder? border, focusBorder, disabledBorder;
   final Color? fill;
+  final EdgeInsets? padding;
 
   BaseInput({
     this.listener,
@@ -38,6 +38,7 @@ class BaseInput extends StatelessWidget {
     this.focusBorder,
     this.disabledBorder,
     this.fill,
+    this.padding = const EdgeInsets.symmetric(horizontal: 0),
     this.onTap
   });
   @override
@@ -59,7 +60,8 @@ class BaseInput extends StatelessWidget {
       decoration: InputDecoration(
         fillColor: fill,
         filled: true,
-        contentPadding: EdgeInsets.symmetric(horizontal: 14.0.w),
+        isDense: true,
+        contentPadding: padding,
         labelText: label,
         labelStyle: Theme.of(context).textTheme.regular14
           .copyWith(color: Theme.of(context).colorScheme.inputLabel),

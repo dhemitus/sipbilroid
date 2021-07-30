@@ -34,8 +34,8 @@ class _ClaimScreenState extends State<ClaimScreen> {
   }
 
   void _onTime(DateTime d) {
-    _date = DateFormat('yyyy-MM-dd').format(d);
-
+    //_date = DateFormat('yyyy-MM-dd').format(d);
+    _date = Format.dashDate().format(d);
   }
 
   void _onCar(Map<String, dynamic> d) {
@@ -49,7 +49,7 @@ class _ClaimScreenState extends State<ClaimScreen> {
   void _onSubmit() {
     Map<String, dynamic> _post = {
       'kendaraan_id': _vehicle.toString(),
-      'tanggal_klaim': _date ?? DateFormat('yyyy-MM-dd').format(DateTime.now()),
+      'tanggal_klaim': _date ?? Format.dashDate().format(DateTime.now()),
       'lokasi': _location,
       'jenis_bbm': _gasoline,
       'jumlah_liter': _litreController.text,

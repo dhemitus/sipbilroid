@@ -32,7 +32,7 @@ class _VehicleListScreenState extends State<VehicleListScreen> {
     return BlocBuilder<VehicleBloc, VehicleState>(
       buildWhen: (previous, current) => previous.vehicle != current.vehicle,
       builder: (BuildContext context, VehicleState state) {
-  
+
         List<Map<String, dynamic>> _list = [{'id':0, 'plate': 'Pilih kendaraan'}];
         Map<String, dynamic> _value = {};
         if(state.vehicle.list != null && state.vehicle.list!.isNotEmpty) {
@@ -46,7 +46,7 @@ class _VehicleListScreenState extends State<VehicleListScreen> {
             _value = _list[0];
           }
         }
-        return MapDropMenuButton(value: _value, items: _list, onChange: widget.onChange,);
+        return MapDropMenuButton(value: _value, items: _list, onChange: widget.onChange, title: 'Nomor kendaraan',);
       }
     );
   }

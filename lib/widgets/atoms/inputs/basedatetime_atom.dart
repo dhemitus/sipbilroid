@@ -8,8 +8,9 @@ class BaseDateTime extends StatelessWidget {
   final DateFormat? format;
   final Function? onChange;
   final DateTime? value;
+  final Color? fill;
 
-  BaseDateTime({this.format, this.onChange, this.value});
+  BaseDateTime({this.format, this.onChange, this.value, this.fill});
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +30,9 @@ class BaseDateTime extends StatelessWidget {
       style: Theme.of(context).textTheme.regular14
           .copyWith(color: Theme.of(context).colorScheme.inputText),
       decoration: InputDecoration(
-        fillColor: Theme.of(context).colorScheme.inputBackground.withOpacity(.2),
+        isDense: true,
+        contentPadding: EdgeInsets.all(0),
+        fillColor: fill,
         filled: true,
         border: InputBorder.none,
       )

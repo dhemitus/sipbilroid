@@ -15,8 +15,8 @@ class LoginForm extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: 48.0.w),
       child: Column(
         children: <Widget>[
-          InputText(hint: 'No Handphone', controller: loginController,),
-          InputText(hint: 'Password', controller: passwordController, password: true,),
+          InputText(hint: 'No Handphone', controller: loginController, inputType: TextInputType.phone),
+          InputText(hint: 'Password', controller: passwordController, password: true, inputType: TextInputType.visiblePassword,),
           SizedBox(height: 82.0.w,),
           PrimaryButton(label: 'Login', onTap: onSubmit,)
         ],
