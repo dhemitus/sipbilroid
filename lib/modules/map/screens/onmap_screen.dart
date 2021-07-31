@@ -8,8 +8,9 @@ class OnMapScreen extends StatelessWidget {
   final Function? onLocation;
   final Function(String)? onResult;
   final String? location;
+  final bool enable;
 
-  OnMapScreen({this.onLocation, this.onResult, this.location = 'Jalan ...'});
+  OnMapScreen({this.onLocation, this.onResult, this.location = 'Jalan ...', this.enable = true});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +21,7 @@ class OnMapScreen extends StatelessWidget {
         WidgetsBinding.instance!.addPostFrameCallback((_) { 
           onResult!(state.map.location!);
         });
-        return FieldButton(label: state.map.location ?? location, title: 'Lokasi', onTap: onLocation);
+        return FieldButton(label: state.map.location ?? location, title: 'Lokasi', onTap: onLocation, enable: enable);
       }
     );
 

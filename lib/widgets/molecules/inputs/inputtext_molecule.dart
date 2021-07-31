@@ -48,10 +48,14 @@ class InputText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Color _color = solid ?
+      Theme.of(context).colorScheme.defaultBackground :
+      Theme.of(context).colorScheme.inputBackground.withOpacity(.2);
+
     return title != null ?
-      _withTitle(fill ?? Theme.of(context).colorScheme.inputBackground.withOpacity(solid ? 1 : .2), Theme.of(context).colorScheme.inputLabel, Theme.of(context).colorScheme.noColor)
+      _withTitle(fill ?? _color, Theme.of(context).colorScheme.inputLabel, Theme.of(context).colorScheme.noColor)
       :
-      _withoutTitle(fill ?? Theme.of(context).colorScheme.inputBackground.withOpacity(solid ? 1 : .2));
+      _withoutTitle(fill ?? _color);
   }
 
   Widget _withTitle(Color c, Color l, Color b) {
@@ -84,7 +88,15 @@ class InputText extends StatelessWidget {
             children: warning ?? <Widget>[],
           ),
         ],
-      )
+      ),
+      shadow: solid ? [
+        BoxShadow(
+          color: Colors.black.withOpacity(0.1),
+          spreadRadius: 6.0.w,
+          blurRadius: 9.0.w,
+          offset: Offset(0, 6.0.w)
+        )
+      ] : [],
     );
   }
 

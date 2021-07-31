@@ -8,8 +8,9 @@ import 'package:carousel_slider/carousel_slider.dart';
 class VehicleListScreen extends StatefulWidget {
   final Function? onChange;
   final String? plate;
+  final bool? edit;
 
-  VehicleListScreen({this.onChange, this.plate});
+  VehicleListScreen({this.onChange, this.plate, this.edit = false});
 
   @override
   _VehicleListScreenState createState() => _VehicleListScreenState();
@@ -46,7 +47,7 @@ class _VehicleListScreenState extends State<VehicleListScreen> {
             _value = _list[0];
           }
         }
-        return MapDropMenuButton(value: _value, items: _list, onChange: widget.onChange, title: 'Nomor kendaraan',);
+        return MapDropMenuButton(value: _value, items: widget.edit! ? [] : _list, onChange: widget.onChange, title: 'Nomor kendaraan',);
       }
     );
   }

@@ -4,9 +4,9 @@ import 'package:sipbilroid/widgets/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class HeaderBar extends StatelessWidget {
-  final String? title, description, subdescription;
+  final String? title, description, subdescription, label;
 
-  HeaderBar({this.title, this.description, this.subdescription});
+  HeaderBar({this.title, this.description, this.subdescription, this.label});
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +17,13 @@ class HeaderBar extends StatelessWidget {
         children: <Widget>[
           SimpleBar(
             margin: EdgeInsets.only(top: 48.0.w),
-            left: LogoContainer(small: false,),
+            left: Column(
+              children: <Widget>[
+                LogoContainer(small: false,),
+                SizedBox(height: 7.0.w,),
+                Regular9Text(label ?? '')
+              ],
+            ),
             right: Column(
               crossAxisAlignment: CrossAxisAlignment.end,
               children: <Widget>[

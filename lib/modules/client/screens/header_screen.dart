@@ -27,7 +27,7 @@ class _HeaderScreenState extends State<HeaderScreen> {
       buildWhen: (previous, current) => previous.client != current.client,
       builder: (BuildContext context, ClientState state) {
         print(state.client);
-        return HeaderBar(title: widget.title, description: state.client.name, subdescription: state.client.phone,);
+        return HeaderBar(title: widget.title, description: state.client.name, subdescription: state.client.phone, label: state.client.satker,);
       }
     );
   }

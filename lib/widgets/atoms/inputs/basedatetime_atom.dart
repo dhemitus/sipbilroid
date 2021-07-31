@@ -9,12 +9,14 @@ class BaseDateTime extends StatelessWidget {
   final Function? onChange;
   final DateTime? value;
   final Color? fill;
+  final bool? enable;
 
-  BaseDateTime({this.format, this.onChange, this.value, this.fill});
+  BaseDateTime({this.format, this.onChange, this.value, this.fill, this.enable = true});
 
   @override
   Widget build(BuildContext context) {
     return DateTimeField(
+      enabled: enable!,
       resetIcon: null,
       initialValue: value ?? DateTime.now(),
       format: format ?? DateFormat("yyyy-MM-dd"),

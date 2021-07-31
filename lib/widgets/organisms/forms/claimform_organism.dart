@@ -9,11 +9,11 @@ class ClaimForm extends StatelessWidget {
   final Function? onSubmit, onLoad, onTime, onLocation;
   final Widget? gasoline, vehicle, map;
   final File? receipt;
-  final bool? edit;
+  final bool? edit, enable;
   final String? url;
   final DateTime? date;
 
-  ClaimForm({this.totalController, this.litreController, this.locationController, this.onLocation, this.onTime, this.onSubmit, this.onLoad, this.gasoline, this.vehicle, this.map, this.receipt, this.edit = false, this.url, this.date});
+  ClaimForm({this.totalController, this.litreController, this.locationController, this.onLocation, this.onTime, this.onSubmit, this.onLoad, this.gasoline, this.vehicle, this.map, this.receipt, this.edit = false, this.enable = true, this.url, this.date});
 
   @override
   Widget build(BuildContext context) {
@@ -23,14 +23,14 @@ class ClaimForm extends StatelessWidget {
         children: <Widget>[
           SizedBox(height: 14.0.w,),
           vehicle ?? Container(),
-          DateTimeInput(onChange: onTime, value: date, title: 'Tanggal',),
+          DateTimeInput(onChange: onTime, value: date, title: 'Tanggal', enable: enable),
           map ?? Container(),
           gasoline ?? Container(),
-          InputText(hint: 'Jumlah Liter', controller: litreController, inputType: TextInputType.number, title: 'Jumlah Liter',),
-          InputText(hint: 'Total Rupiah', controller: totalController, inputType: TextInputType.number),
-          ImageButton(label: 'upload receipt', onTap: onLoad, file: receipt, url: url, edit: edit),
+          InputText(hint: 'Jumlah Liter', controller: litreController, inputType: TextInputType.number, title: 'Jumlah Liter', enable: enable!),
+          InputText(hint: 'Rp.', controller: totalController, inputType: TextInputType.number, title: 'Total Rupiah', enable: enable!),
+          ImageButton(label: 'upload receipt', onTap: onLoad, file: receipt, url: url, edit: edit, enable: enable,),
           SizedBox(height: 82.0.w,),
-          PrimaryButton(label: 'Submit', onTap: onSubmit),
+          enable! ? PrimaryButton(label: 'Submit', onTap: onSubmit) : Container(),
           SizedBox(height: 82.0.w,)
         ],
       )

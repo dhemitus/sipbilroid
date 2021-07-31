@@ -80,6 +80,10 @@ class _DetailScreenState extends State<DetailScreen>{
     _locationController.text = _claim.lokasi!;
     _litreController.text  = _claim.jumlahLiter!.toString();
     _totalController.text = _claim.total!.toString();
+    bool _enable = true;
+    if(_claim.status == 'TERKONFIRMASI' || _claim.status == 'TERVERIVIKASI') {
+      _enable = false;
+    }
     return BlocBuilder<ClaimBloc, ClaimState>(
       buildWhen: (previous, current) => previous.claim != current.claim,
       builder: (BuildContext context, ClaimState state) {
@@ -94,18 +98,19 @@ class _DetailScreenState extends State<DetailScreen>{
             BoardContainer(),
             BottomCard(
               child: ClaimForm(
-                map: OnMapScreen(onLocation: _onLocation, onResult: _onPosition, location: _claim.lokasi),
+                map: OnMapScreen(onLocation: _onLocation, onResult: _onPosition, location: _claim.lokasi, enable: _enable),
                 date: _claim.tanggalKlaim,
                 locationController: _locationController,
                 litreController: _litreController,
                 totalController: _totalController,
-                vehicle: VehicleListScreen(plate: _claim.nomorPolisi),
-                gasoline:GasolineScreen(onChange: _onGas, value: _claim.jenisBbm),
+                vehicle: VehicleListScreen(plate: _claim.nomorPolisi, edit: true),
+                gasoline:GasolineScreen(onChange: _onGas, value: _claim.jenisBbm, enable: _enable),
                 onTime: _onTime,
                 onLoad: _onLoad,
                 onSubmit: _onSubmit,
                 receipt: _file,
                 edit: true,
+                enable: _enable,
                 url: 'http://151.106.113.7/bbm-claim-api${_claim.struk}',
               ),
             )

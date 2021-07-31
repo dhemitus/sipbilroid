@@ -8,8 +8,9 @@ class DateTimeInput extends StatelessWidget {
   final String? title;
   final Function? onChange;
   final DateTime? value;
+  final bool? enable;
 
-  DateTimeInput({this.title, this.onChange, this.value});
+  DateTimeInput({this.title, this.onChange, this.value, this.enable = true});
 
   @override
   Widget build(BuildContext context) {
@@ -23,6 +24,7 @@ class DateTimeInput extends StatelessWidget {
         children: <Widget>[
           Regular9Text(title ?? '', color: Theme.of(context).colorScheme.inputLabel),
           BaseDateTime(
+            enable: enable,
             onChange:onChange,
             value: value,
             fill: Theme.of(context).colorScheme.noColor,

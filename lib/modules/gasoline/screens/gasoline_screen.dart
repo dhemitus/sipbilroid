@@ -7,8 +7,9 @@ import 'package:sipbilroid/modules/modules.dart';
 class GasolineScreen extends StatefulWidget {
   final Function? onChange;
   final String? value;
+  final bool? enable;
 
-  GasolineScreen({this.onChange, this.value});
+  GasolineScreen({this.onChange, this.value, this.enable = true});
 
   @override
   _GasolineScreenState createState() => _GasolineScreenState();
@@ -36,7 +37,7 @@ class _GasolineScreenState extends State<GasolineScreen> {
           }).toList();
         }
         if(state.status == GasolineStatus.DONE) {
-          return DropMenuButton(value: widget.value ?? _gasoline[0], items: _gasoline, onChange: widget.onChange, title: 'Jenis BBM',);
+          return DropMenuButton(value: widget.value ?? _gasoline[0], items: widget.enable! ? _gasoline : [], onChange: widget.onChange, title: 'Jenis BBM',);
         } else {
           return Container();
         }
