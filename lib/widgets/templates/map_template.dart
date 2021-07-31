@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sipbilroid/widgets/widgets.dart';
-import 'package:sipbilroid/shareds/shareds.dart';
 
 class MapTemplate extends StatelessWidget {
   final List<Widget>? children;
   final Widget? map;
-  final Function? onConfirm;
+  final Function? onConfirm, onLocate;
+  final TextEditingController? controller;
 
-  MapTemplate({this.children = const [], this.map, this.onConfirm});
+  MapTemplate({this.children = const [], this.map, this.onConfirm, this.onLocate, this.controller});
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +22,12 @@ class MapTemplate extends StatelessWidget {
           BaseContainer(
             height: 140.0.w,
             padding: EdgeInsets.only(left: 50.0.w,top: 80.0.w, right: 50.0.w),
-            child: InputText(hint: 'Pilih lokasi', solid: true),
+            child: InputText(
+              hint: 'Pilih lokasi',
+              solid: true,
+              suffix: MarkButton(icon: Icon(Icons.map), onTap: onLocate),
+              controller: controller,
+            ),
           ),
           BaseContainer(
             padding: EdgeInsets.only(left: 50, bottom: 60, right: 50),

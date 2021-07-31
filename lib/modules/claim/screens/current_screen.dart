@@ -12,7 +12,7 @@ class CurrentScreen extends StatelessWidget {
       children: [
         HeaderScreen(title: 'CURRENT MONTH',),
         VehicleScreen(),
-        CurrentLoaderScreen(),
+        CurrentLoaderScreen()
       ],
     );
   }

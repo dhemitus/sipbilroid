@@ -12,7 +12,9 @@ class HistoryScreen extends StatelessWidget {
       children: [
         HeaderScreen(title: 'HISTORY',),
         VehicleScreen(),
-        HistoryListScreen()
+        Expanded(
+          child: HistoryListScreen()
+        ),
       ],
     );
   }

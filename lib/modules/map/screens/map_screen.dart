@@ -6,7 +6,6 @@ import 'package:sipbilroid/widgets/widgets.dart';
 import 'package:sipbilroid/modules/modules.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
-//import 'package:geocoding/geocoding.dart';
 
 class MapScreen extends StatefulWidget {
 
@@ -18,6 +17,7 @@ class MapScreen extends StatefulWidget {
 class _MapScreenState extends State<MapScreen> {
   final Location _location = Location();
   late LocationData _current;
+  final TextEditingController _locateController = TextEditingController();
 
   Map<MarkerId, Marker> _markers = <MarkerId, Marker>{};
   MarkerId _id = MarkerId('POM_BBM');
@@ -96,18 +96,39 @@ class _MapScreenState extends State<MapScreen> {
     });
   }
 
+  void _onLocate() {
+    BlocProvider.of<MapBloc>(context).add(GetMap(MapModel(location: _locateController.text)));
+    print(_locateController.text);
+  }
 
   @override
   Widget build(BuildContext context) {
-    return MapTemplate(
-      map: GoogleMap(
-        mapType: MapType.normal,
-        initialCameraPosition: CameraPosition(target: _initial, zoom: 15),
-        onMapCreated: _onMap,
-        myLocationEnabled: true,
-        markers: Set<Marker>.of(_markers.values),
-      ),
-      onConfirm: () => Navigator.of(context).pop(),
+    return BlocBuilder<MapBloc, MapState>(
+      buildWhen: (previous, current) => previous.map != current.map,
+      builder: (BuildContext context, MapState state) {
+        WidgetsBinding.instance!.addTimingsCallback((_) {
+          _controller.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(
+            target: state.map.latLng!,
+            zoom: 15
+          )));
+          _initial = state.map.latLng!;
+          _setMarker(_initial); 
+
+        });
+        print(state.map.latLng);
+        return MapTemplate(
+          map: GoogleMap(
+            mapType: MapType.normal,
+            initialCameraPosition: CameraPosition(target: _initial, zoom: 15),
+            onMapCreated: _onMap,
+            myLocationEnabled: true,
+            markers: Set<Marker>.of(_markers.values),
+          ),
+          controller: _locateController,
+          onConfirm: () => Navigator.of(context).pop(),
+          onLocate: _onLocate,
+        );
+      }
     );
   }
 }

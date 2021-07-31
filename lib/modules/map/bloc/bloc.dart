@@ -22,6 +22,10 @@ class MapBloc extends Bloc<MapEvent, MapState> {
     if(event is SetMap) {
       yield* _setMap(event);
     }
+
+    if(event is GetMap) {
+      yield* _getMap(event);
+    }
   }
 
   Stream<MapState> _setMap(SetMap event) async* {
@@ -31,5 +35,11 @@ class MapBloc extends Bloc<MapEvent, MapState> {
     yield this.state.copyWith(map: _map, status: MapStatus.DONE);
   }
 
+  Stream<MapState> _getMap(GetMap event) async* {
+    yield this.state.copyWith(status: MapStatus.LOADING);
+
+    MapModel _map = await _repo.getLocation(event.map);
+    yield this.state.copyWith(map: _map, status: MapStatus.DONE);
+  }
 
 }
